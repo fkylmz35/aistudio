@@ -1,8 +1,15 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error("[Supabase Server] Missing environment variables:", {
+    url: supabaseUrl ? "SET" : "MISSING",
+    key: supabaseAnonKey ? "SET" : "MISSING",
+  })
+}
 
 // Server client factory - server components ve route handlers için
 export async function createSupabaseServerClient() {
