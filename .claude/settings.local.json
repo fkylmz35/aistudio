@@ -8,7 +8,8 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Mira AI Studio\n\nFeatures:\n- AI image generation with multiple quality options (Standard, 1K, 2K, 4K)\n- Credit system with Supabase real-time updates\n- User authentication (Google OAuth + Email)\n- Gallery with pending image cards\n- Pricing page with credit packages\n- Settings page (profile, email, password, notifications)\n- Responsive sidebar navigation\n- Dark theme UI with Framer Motion animations\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git branch:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
