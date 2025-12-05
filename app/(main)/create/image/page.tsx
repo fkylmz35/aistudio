@@ -136,13 +136,8 @@ export default function CreateImagePage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || [])
-    console.log("[Page] Files selected:", files.length, files.map((f) => ({ name: f.name, size: f.size, type: f.type })))
     if (files.length > 0) {
-      setSelectedFiles((prev) => {
-        const newFiles = [...prev, ...files].slice(0, 5) // Max 5 dosya
-        console.log("[Page] Total selected files:", newFiles.length)
-        return newFiles
-      })
+      setSelectedFiles((prev) => [...prev, ...files].slice(0, 5)) // Max 5 dosya
     }
     // Input'u temizle ki aynı dosya tekrar seçilebilsin
     if (fileInputRef.current) {
@@ -155,13 +150,7 @@ export default function CreateImagePage() {
   }
 
   const handleGenerate = async () => {
-    console.log("[Page] handleGenerate called")
-    console.log("[Page] prompt:", prompt)
-    console.log("[Page] selectedFiles:", selectedFiles.length)
-    console.log("[Page] user:", user?.id)
-
     if (!prompt.trim() || isGenerating || isCooldown || !user) {
-      console.log("[Page] Early return - prompt empty:", !prompt.trim(), "isGenerating:", isGenerating, "isCooldown:", isCooldown, "no user:", !user)
       return
     }
 
@@ -176,22 +165,10 @@ export default function CreateImagePage() {
       // Dosyaları yükle
       let referenceUrls: string[] = []
       if (selectedFiles.length > 0) {
-        console.log("[Page] Starting file upload...")
         referenceUrls = await uploadMultipleFiles(selectedFiles, user.id)
-        console.log("[Page] Upload completed, URLs:", referenceUrls)
-      } else {
-        console.log("[Page] No files to upload")
       }
 
       setIsUploading(false)
-
-      console.log("[Page] Calling generateImage with:", {
-        prompt: currentPrompt,
-        aspect_ratio: aspectRatio,
-        resolution: quality,
-        user_id: user.id,
-        reference_urls: referenceUrls,
-      })
 
       // Webhook'a istek gönder
       const result = await generateImage({

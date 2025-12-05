@@ -111,7 +111,6 @@ export default function GalleryPage() {
         },
         (payload) => {
           const newImage = payload.new as GeneratedImage
-          console.log("[Gallery] New image received:", newImage.id)
 
           // Yeni görsel geldiğinde listeye ekle
           setImages((prev) => [newImage, ...prev])
@@ -158,7 +157,6 @@ export default function GalleryPage() {
         (p) => p.prompt.trim().toLowerCase() === latestImage.prompt?.trim().toLowerCase()
       )
       if (matchingPending) {
-        console.log("[Gallery] Removing matching pending image:", matchingPending.id)
         removePendingImage(matchingPending.id)
       }
     }

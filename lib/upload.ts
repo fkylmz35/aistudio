@@ -6,6 +6,38 @@ export interface UploadResult {
   error?: string
 }
 
+// İzin verilen MIME tipleri
+const ALLOWED_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "image/svg+xml",
+]
+
+// İzin verilen dosya uzantıları
+const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "svg"]
+
+/**
+ * Dosya tipini doğrular
+ * @param file - Kontrol edilecek dosya
+ * @returns Dosya tipi geçerli mi
+ */
+function validateFileType(file: File): boolean {
+  // MIME type kontrolü
+  if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    return false
+  }
+
+  // Dosya uzantısı kontrolü
+  const ext = file.name.split(".").pop()?.toLowerCase()
+  if (!ext || !ALLOWED_EXTENSIONS.includes(ext)) {
+    return false
+  }
+
+  return true
+}
+
 /**
  * Dosyayı Supabase Storage'a yükler ve public URL döndürür
  * @param file - Yüklenecek dosya
@@ -14,8 +46,16 @@ export interface UploadResult {
  */
 export async function uploadToStorage(file: File, userId: string): Promise<UploadResult> {
   try {
+    // Dosya tipi doğrulaması
+    if (!validateFileType(file)) {
+      return {
+        success: false,
+        error: "Geçersiz dosya tipi. Sadece görsel dosyaları (jpg, png, gif, webp, svg) yüklenebilir.",
+      }
+    }
+
     // Benzersiz dosya adı oluştur (flat structure - no folders)
-    const fileExt = file.name.split(".").pop()
+    const fileExt = file.name.split(".").pop()?.toLowerCase()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
     // File'ı ArrayBuffer'a çevir

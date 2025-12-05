@@ -71,7 +71,6 @@ export function CreditsProvider({ children }: { children: ReactNode }) {
           filter: `user_id=eq.${user.id}`,
         },
         (payload) => {
-          console.log("[Credits] Real-time update:", payload)
           if (payload.new && "balance" in payload.new) {
             const newData = payload.new as { balance: number; is_pro_enabled?: boolean }
             setCredits(newData.balance)

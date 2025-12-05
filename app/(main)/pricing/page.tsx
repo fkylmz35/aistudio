@@ -113,7 +113,6 @@ export default function PricingPage() {
 
   const handlePurchase = (pkg: CreditPackage) => {
     // TODO: Implement payment integration (Iyzico, Stripe, etc.)
-    console.log("[Pricing] Purchase clicked:", pkg.name)
     alert(`${pkg.name} paketi satın alma işlemi yakında aktif olacak!`)
   }
 
