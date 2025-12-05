@@ -1,4 +1,4 @@
-const WEBHOOK_URL = "https://n8n.fkylmz.cloud/webhook/imagegen"
+const WEBHOOK_URL = process.env.NEXT_PUBLIC_WEBHOOK_URL
 
 export interface GenerateImageRequest {
   prompt: string
@@ -21,6 +21,14 @@ export interface GenerateImageResponse {
  * @returns İstek başarıyla gönderildi mi
  */
 export async function generateImage(request: GenerateImageRequest): Promise<GenerateImageResponse> {
+  if (!WEBHOOK_URL) {
+    console.error("[Webhook] NEXT_PUBLIC_WEBHOOK_URL is not configured")
+    return {
+      success: false,
+      error: "Webhook URL yapılandırılmamış",
+    }
+  }
+
   try {
     const payload = {
       prompt: request.prompt,
@@ -30,9 +38,6 @@ export async function generateImage(request: GenerateImageRequest): Promise<Gene
       reference_urls: request.reference_urls || [],
     }
 
-    console.log("[Webhook] Sending request to:", WEBHOOK_URL)
-    console.log("[Webhook] Payload:", JSON.stringify(payload, null, 2))
-
     // Fire and forget - response beklemeden istek gönder
     fetch(WEBHOOK_URL, {
       method: "POST",
@@ -40,17 +45,9 @@ export async function generateImage(request: GenerateImageRequest): Promise<Gene
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
+    }).catch((error) => {
+      console.error("[Webhook] Error:", error)
     })
-      .then((response) => {
-        console.log("[Webhook] Response status:", response.status)
-        return response.text()
-      })
-      .then((text) => {
-        console.log("[Webhook] Response body:", text)
-      })
-      .catch((error) => {
-        console.error("[Webhook] Error:", error)
-      })
 
     // İstek gönderildi olarak başarılı dön
     return {
