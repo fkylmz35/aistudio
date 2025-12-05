@@ -1,0 +1,86 @@
+import { supabase } from "@/lib/supabase-browser"
+
+export interface UploadResult {
+  success: boolean
+  url?: string
+  error?: string
+}
+
+/**
+ * Dosyayı Supabase Storage'a yükler ve public URL döndürür
+ * @param file - Yüklenecek dosya
+ * @param userId - Kullanıcı ID'si (dosya yolunda kullanılır)
+ * @returns Public URL veya hata
+ */
+export async function uploadToStorage(file: File, userId: string): Promise<UploadResult> {
+  try {
+    console.log("[Upload] Starting upload for file:", file.name, "Size:", file.size, "Type:", file.type)
+    console.log("[Upload] User ID:", userId)
+
+    // Benzersiz dosya adı oluştur (flat structure - no folders)
+    const fileExt = file.name.split(".").pop()
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+    console.log("[Upload] Generated fileName:", fileName)
+
+    // File'ı ArrayBuffer'a çevir
+    const arrayBuffer = await file.arrayBuffer()
+    const fileBlob = new Blob([arrayBuffer], { type: file.type })
+    console.log("[Upload] Converted to Blob, size:", fileBlob.size)
+
+    // Dosyayı yükle
+    const { data, error } = await supabase.storage
+      .from("temp-uploads")
+      .upload(fileName, fileBlob, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.type,
+      })
+
+    if (error) {
+      console.error("[Upload] Upload error:", error)
+      return { success: false, error: error.message }
+    }
+
+    console.log("[Upload] Upload successful, path:", data.path)
+
+    // Public URL al
+    const { data: urlData } = supabase.storage
+      .from("temp-uploads")
+      .getPublicUrl(data.path)
+
+    console.log("[Upload] Public URL:", urlData.publicUrl)
+
+    return {
+      success: true,
+      url: urlData.publicUrl,
+    }
+  } catch (error) {
+    console.error("[Upload] Upload exception:", error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Dosya yüklenirken bir hata oluştu",
+    }
+  }
+}
+
+/**
+ * Birden fazla dosyayı yükler
+ * @param files - Yüklenecek dosyalar
+ * @param userId - Kullanıcı ID'si
+ * @returns Public URL'lerin listesi
+ */
+export async function uploadMultipleFiles(files: File[], userId: string): Promise<string[]> {
+  console.log("[Upload] uploadMultipleFiles called with", files.length, "files")
+
+  const uploadPromises = files.map((file) => uploadToStorage(file, userId))
+  const results = await Promise.all(uploadPromises)
+
+  console.log("[Upload] All upload results:", results)
+
+  const urls = results
+    .filter((result) => result.success && result.url)
+    .map((result) => result.url as string)
+
+  console.log("[Upload] Final URLs to return:", urls)
+  return urls
+}
