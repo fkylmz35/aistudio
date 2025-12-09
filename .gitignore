@@ -35,3 +35,6 @@ nul
 # Misc
 *.log
 .vercel
+
+# Claude context file (local only)
+CLAUDE.md

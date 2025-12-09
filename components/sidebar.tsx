@@ -44,7 +44,7 @@ export function Sidebar() {
           animate={{ justifyContent: isExpanded ? "flex-start" : "center" }}
         >
           <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden">
-            <Image src="/logo.png" alt="Mira Logo" width={36} height={36} className="object-contain" />
+            <Image src="/logo.png" alt="Nairoo Logo" width={36} height={36} className="object-contain" />
           </div>
           <AnimatePresence>
             {isExpanded && (
@@ -55,7 +55,7 @@ export function Sidebar() {
                 transition={{ duration: 0.15, delay: 0.05 }}
                 className="font-semibold text-lg text-foreground whitespace-nowrap"
               >
-                Mira AI
+                Nairoo AI
               </motion.span>
             )}
           </AnimatePresence>

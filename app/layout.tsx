@@ -7,7 +7,7 @@ import { CreditsProvider } from "@/contexts/credits-context"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Mira AI Studio - Yapay Zeka ile Görsel Oluştur",
+  title: "Nairoo AI Studio - Yapay Zeka ile Görsel Oluştur",
   description: "Profesyonel AI içerik üretim platformu - görsel ve video oluşturma",
   generator: "v0.app",
 }
