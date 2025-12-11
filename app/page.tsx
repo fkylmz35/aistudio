@@ -126,7 +126,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="/" className="flex items-center">
               <div className="w-10 h-10 rounded-xl overflow-hidden">
                 <Image
                   src="/logo.png"
@@ -136,7 +136,6 @@ export default function LandingPage() {
                   className="object-cover w-full h-full"
                 />
               </div>
-              <span className="text-xl font-semibold text-white">Nairoo AI</span>
             </Link>
 
             {/* Auth Buttons */}
@@ -163,7 +162,7 @@ export default function LandingPage() {
         {/* Animated gradient background */}
         <div className="absolute inset-0 bg-black" />
 
-        {/* Animated color blobs */}
+        {/* Animated color blobs - faster breathing */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/4 left-1/4 w-[800px] h-[800px] rounded-full blur-[200px] opacity-60"
@@ -174,7 +173,7 @@ export default function LandingPage() {
               scale: [1, 1.2, 0.9, 1],
             }}
             transition={{
-              duration: 20,
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -188,7 +187,7 @@ export default function LandingPage() {
               scale: [1, 0.9, 1.1, 1],
             }}
             transition={{
-              duration: 25,
+              duration: 10,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -202,7 +201,7 @@ export default function LandingPage() {
               scale: [1, 1.1, 0.95, 1],
             }}
             transition={{
-              duration: 18,
+              duration: 7,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -216,7 +215,7 @@ export default function LandingPage() {
               scale: [1, 0.95, 1.15, 1],
             }}
             transition={{
-              duration: 22,
+              duration: 9,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -233,55 +232,45 @@ export default function LandingPage() {
             variants={stagger}
             className="space-y-8"
           >
-            {/* 3D Brand Title - Large */}
+            {/* 3D Brand Title - Large with animated letter glow */}
             <motion.div
               variants={fadeInUp}
               className="relative"
             >
-              {/* Multiple blur layers for 3D depth */}
+              {/* Background glow layer */}
               <div className="absolute inset-0 flex justify-center items-center">
-                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/5 blur-3xl select-none tracking-tight">
-                  nAIroo
-                </span>
-              </div>
-              <div className="absolute inset-0 flex justify-center items-center">
-                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/10 blur-2xl select-none tracking-tight">
-                  nAIroo
-                </span>
-              </div>
-              <div className="absolute inset-0 flex justify-center items-center">
-                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/15 blur-xl select-none tracking-tight">
+                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/10 blur-3xl select-none tracking-tight">
                   nAIroo
                 </span>
               </div>
 
-              {/* Main text with 3D shadow effect */}
-              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none">
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #a0a0a0 50%, #505050 100%)',
-                    textShadow: '0 4px 30px rgba(255,255,255,0.3), 0 0 100px rgba(255,255,255,0.1)',
-                  }}
-                >
-                  n
-                </span>
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage: 'linear-gradient(180deg, #e0e0e0 0%, #808080 50%, #404040 100%)',
-                  }}
-                >
-                  AI
-                </span>
-                <span
-                  className="text-transparent bg-clip-text"
-                  style={{
-                    backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #a0a0a0 50%, #505050 100%)',
-                  }}
-                >
-                  roo
-                </span>
+              {/* Main text with sequential letter glow animation */}
+              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none flex justify-center">
+                {['n', 'A', 'I', 'r', 'o', 'o'].map((letter, index) => (
+                  <motion.span
+                    key={index}
+                    className="text-white relative inline-block"
+                    style={{
+                      textShadow: '0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(255,255,255,0.4), 0 4px 20px rgba(0,0,0,0.5)',
+                    }}
+                    animate={{
+                      textShadow: [
+                        '0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 60px rgba(255,255,255,1), 0 0 120px rgba(255,255,255,0.6), 0 0 200px rgba(255,255,255,0.4), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.5)',
+                      ],
+                      color: ['#e0e0e0', '#ffffff', '#e0e0e0'],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: index * 0.3,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
               </h1>
               <p className="text-zinc-500 text-lg sm:text-2xl mt-4 tracking-[0.4em] uppercase font-light">AI Studio</p>
             </motion.div>
