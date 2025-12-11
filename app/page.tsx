@@ -244,8 +244,8 @@ export default function LandingPage() {
                 </span>
               </div>
 
-              {/* Main text - static dark gray */}
-              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none text-zinc-600">
+              {/* Main text - off-white/dirty white */}
+              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none text-stone-200">
                 nAIroo
               </h1>
               <p className="text-zinc-500 text-lg sm:text-2xl mt-4 tracking-[0.4em] uppercase font-light">AI Studio</p>
