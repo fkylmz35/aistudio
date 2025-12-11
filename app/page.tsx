@@ -159,33 +159,72 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-        {/* Base gradient - dark to light */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f12] to-[#1a1a2e]" />
+      <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-black" />
 
-        {/* Vibrant 3D Blur Orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Large center white/cream glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-br from-white/[0.08] via-amber-100/[0.03] to-transparent rounded-full blur-[200px]" />
-
-          {/* Vibrant purple orb - left */}
-          <div className="absolute top-1/4 left-[10%] w-[600px] h-[600px] bg-purple-600/40 rounded-full blur-[180px]" />
-
-          {/* Vibrant blue orb - right */}
-          <div className="absolute top-1/3 right-[5%] w-[500px] h-[500px] bg-blue-600/35 rounded-full blur-[150px]" />
-
-          {/* Vibrant pink/magenta orb - bottom left */}
-          <div className="absolute bottom-1/4 left-[20%] w-[450px] h-[450px] bg-pink-500/30 rounded-full blur-[140px]" />
-
-          {/* Cyan accent - bottom right */}
-          <div className="absolute bottom-1/3 right-[15%] w-[400px] h-[400px] bg-cyan-500/25 rounded-full blur-[130px]" />
-
-          {/* Warm orange glow - center bottom */}
-          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/15 rounded-full blur-[120px]" />
-
-          {/* Top light gradient */}
-          <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-white/[0.03] via-transparent to-transparent" />
+        {/* Animated color blobs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-[800px] h-[800px] rounded-full blur-[200px] opacity-60"
+            style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+            animate={{
+              x: [0, 100, -50, 0],
+              y: [0, -80, 60, 0],
+              scale: [1, 1.2, 0.9, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute top-1/3 right-1/4 w-[700px] h-[700px] rounded-full blur-[180px] opacity-50"
+            style={{ background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' }}
+            animate={{
+              x: [0, -80, 60, 0],
+              y: [0, 100, -50, 0],
+              scale: [1, 0.9, 1.1, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 left-1/3 w-[600px] h-[600px] rounded-full blur-[160px] opacity-40"
+            style={{ background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' }}
+            animate={{
+              x: [0, 60, -80, 0],
+              y: [0, -60, 80, 0],
+              scale: [1, 1.1, 0.95, 1],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] rounded-full blur-[140px] opacity-35"
+            style={{ background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)' }}
+            animate={{
+              x: [0, -100, 50, 0],
+              y: [0, 50, -100, 0],
+              scale: [1, 0.95, 1.15, 1],
+            }}
+            transition={{
+              duration: 22,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
         </div>
+
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/40" />
 
         <div className="max-w-6xl mx-auto text-center relative z-10 w-full">
           <motion.div
@@ -194,46 +233,63 @@ export default function LandingPage() {
             variants={stagger}
             className="space-y-8"
           >
-            {/* 3D Blur Brand Title */}
+            {/* 3D Brand Title - Large */}
             <motion.div
               variants={fadeInUp}
               className="relative"
             >
-              {/* Blur glow layer */}
-              <div className="absolute inset-0 flex justify-center">
-                <span className="text-5xl sm:text-7xl lg:text-8xl font-bold text-purple-500/30 blur-3xl select-none">
+              {/* Multiple blur layers for 3D depth */}
+              <div className="absolute inset-0 flex justify-center items-center">
+                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/5 blur-3xl select-none tracking-tight">
                   nAIroo
                 </span>
               </div>
-              {/* Main text - darker tones */}
-              <h2 className="relative text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight">
-                <span className="text-zinc-300">n</span>
-                <span className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">AI</span>
-                <span className="text-zinc-300">roo</span>
-              </h2>
-              <p className="text-zinc-600 text-lg sm:text-xl mt-2 tracking-[0.3em] uppercase font-light">AI Studio</p>
+              <div className="absolute inset-0 flex justify-center items-center">
+                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/10 blur-2xl select-none tracking-tight">
+                  nAIroo
+                </span>
+              </div>
+              <div className="absolute inset-0 flex justify-center items-center">
+                <span className="text-7xl sm:text-9xl lg:text-[12rem] font-black text-white/15 blur-xl select-none tracking-tight">
+                  nAIroo
+                </span>
+              </div>
+
+              {/* Main text with 3D shadow effect */}
+              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none">
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #a0a0a0 50%, #505050 100%)',
+                    textShadow: '0 4px 30px rgba(255,255,255,0.3), 0 0 100px rgba(255,255,255,0.1)',
+                  }}
+                >
+                  n
+                </span>
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage: 'linear-gradient(180deg, #e0e0e0 0%, #808080 50%, #404040 100%)',
+                  }}
+                >
+                  AI
+                </span>
+                <span
+                  className="text-transparent bg-clip-text"
+                  style={{
+                    backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #a0a0a0 50%, #505050 100%)',
+                  }}
+                >
+                  roo
+                </span>
+              </h1>
+              <p className="text-zinc-500 text-lg sm:text-2xl mt-4 tracking-[0.4em] uppercase font-light">AI Studio</p>
             </motion.div>
 
-            {/* Heading - darker text */}
-            <motion.h1
-              variants={fadeInUp}
-              className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-zinc-200 leading-tight tracking-tight"
-            >
-              Hayal Et,{" "}
-              <span className="relative">
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent blur-2xl opacity-40">
-                  AI Üretsin
-                </span>
-                <span className="relative bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  AI Üretsin
-                </span>
-              </span>
-            </motion.h1>
-
-            {/* Subheading - darker */}
+            {/* Subheading */}
             <motion.p
               variants={fadeInUp}
-              className="text-base sm:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed pt-4"
             >
               Düşüncelerinizi saniyeler içinde profesyonel görsellere dönüştürün.
               <br className="hidden sm:block" />
@@ -243,18 +299,18 @@ export default function LandingPage() {
             {/* CTA Buttons */}
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
             >
               <Link
                 href="/register"
-                className="group flex items-center gap-2 px-8 py-4 bg-white text-zinc-900 font-medium rounded-full hover:bg-zinc-100 transition-all shadow-[0_0_60px_rgba(255,255,255,0.15)] hover:shadow-[0_0_80px_rgba(255,255,255,0.25)]"
+                className="group flex items-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_60px_rgba(255,255,255,0.2)] hover:shadow-[0_0_80px_rgba(255,255,255,0.3)]"
               >
                 Ücretsiz Başla
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/login"
-                className="flex items-center gap-2 px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-700 hover:border-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all"
+                className="flex items-center gap-2 px-8 py-4 text-white/70 font-medium rounded-full border border-white/20 hover:border-white/40 hover:text-white hover:bg-white/5 transition-all"
               >
                 Giriş Yap
               </Link>
@@ -266,18 +322,18 @@ export default function LandingPage() {
               className="flex items-center justify-center gap-12 pt-16 text-center"
             >
               <div className="group">
-                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">400</div>
-                <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Ücretsiz Kredi</div>
+                <div className="text-3xl font-bold text-white/80 group-hover:text-white transition-colors">400</div>
+                <div className="text-xs text-zinc-500 uppercase tracking-wider mt-1">Ücretsiz Kredi</div>
               </div>
-              <div className="w-px h-12 bg-zinc-700/50" />
+              <div className="w-px h-12 bg-white/10" />
               <div className="group">
-                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">4K</div>
-                <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Çözünürlük</div>
+                <div className="text-3xl font-bold text-white/80 group-hover:text-white transition-colors">4K</div>
+                <div className="text-xs text-zinc-500 uppercase tracking-wider mt-1">Çözünürlük</div>
               </div>
-              <div className="w-px h-12 bg-zinc-700/50" />
+              <div className="w-px h-12 bg-white/10" />
               <div className="group">
-                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">&lt;30s</div>
-                <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Üretim Süresi</div>
+                <div className="text-3xl font-bold text-white/80 group-hover:text-white transition-colors">&lt;30s</div>
+                <div className="text-xs text-zinc-500 uppercase tracking-wider mt-1">Üretim Süresi</div>
               </div>
             </motion.div>
           </motion.div>
