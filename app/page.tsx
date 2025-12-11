@@ -244,28 +244,23 @@ export default function LandingPage() {
                 </span>
               </div>
 
-              {/* Main text with sequential gray breathing glow animation */}
+              {/* Main text with slow sequential gray glow animation */}
               <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none flex justify-center">
                 {['n', 'A', 'I', 'r', 'o', 'o'].map((letter, index) => (
                   <motion.span
                     key={index}
-                    className="relative inline-block"
-                    style={{
-                      color: '#606060',
-                      textShadow: '0 0 20px rgba(150,150,150,0.3), 0 4px 20px rgba(0,0,0,0.5)',
-                    }}
+                    className="relative inline-block text-zinc-400"
                     animate={{
                       textShadow: [
-                        '0 0 10px rgba(100,100,100,0.2), 0 4px 20px rgba(0,0,0,0.5)',
-                        '0 0 40px rgba(200,200,200,0.8), 0 0 80px rgba(180,180,180,0.5), 0 0 120px rgba(150,150,150,0.3), 0 4px 20px rgba(0,0,0,0.5)',
-                        '0 0 10px rgba(100,100,100,0.2), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 0px rgba(150,150,150,0), 0 4px 15px rgba(0,0,0,0.5)',
+                        '0 0 30px rgba(180,180,180,0.6), 0 0 60px rgba(160,160,160,0.4), 0 0 90px rgba(140,140,140,0.2), 0 4px 15px rgba(0,0,0,0.5)',
+                        '0 0 0px rgba(150,150,150,0), 0 4px 15px rgba(0,0,0,0.5)',
                       ],
-                      color: ['#505050', '#e0e0e0', '#505050'],
                     }}
                     transition={{
-                      duration: 2.5,
+                      duration: 4,
                       repeat: Infinity,
-                      delay: index * 0.4,
+                      delay: index * 0.6,
                       ease: "easeInOut",
                     }}
                   >
