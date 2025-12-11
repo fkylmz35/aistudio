@@ -173,7 +173,7 @@ export default function LandingPage() {
               scale: [1, 1.2, 0.9, 1],
             }}
             transition={{
-              duration: 8,
+              duration: 6,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -187,7 +187,7 @@ export default function LandingPage() {
               scale: [1, 0.9, 1.1, 1],
             }}
             transition={{
-              duration: 10,
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -201,7 +201,7 @@ export default function LandingPage() {
               scale: [1, 1.1, 0.95, 1],
             }}
             transition={{
-              duration: 7,
+              duration: 5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -215,7 +215,7 @@ export default function LandingPage() {
               scale: [1, 0.95, 1.15, 1],
             }}
             transition={{
-              duration: 9,
+              duration: 7,
               repeat: Infinity,
               ease: "easeInOut",
             }}
