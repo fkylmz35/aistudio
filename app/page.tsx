@@ -625,6 +625,9 @@ export default function LandingPage() {
               <Link href="#pricing" className="hover:text-white transition-colors">
                 Fiyatlandırma
               </Link>
+              <Link href="/yasal" className="hover:text-white transition-colors">
+                Yasal Bilgiler
+              </Link>
             </div>
 
             {/* Copyright */}

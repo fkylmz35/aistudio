@@ -31,6 +31,7 @@ export default function RegisterPage() {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [termsAccepted, setTermsAccepted] = useState(false)
 
   const router = useRouter()
 
@@ -278,9 +279,25 @@ export default function RegisterPage() {
               </div>
             </div>
 
+            {/* Terms Checkbox */}
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="terms"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5 text-white focus:ring-white/20 focus:ring-offset-0 cursor-pointer"
+              />
+              <label htmlFor="terms" className="text-sm text-zinc-400 cursor-pointer">
+                <Link href="/yasal#kullanim-sartlari" target="_blank" className="text-white hover:underline">Kullanım Şartları</Link>,{" "}
+                <Link href="/yasal#gizlilik" target="_blank" className="text-white hover:underline">Gizlilik Politikası</Link> ve{" "}
+                <Link href="/yasal#kvkk" target="_blank" className="text-white hover:underline">KVKK Aydınlatma Metni</Link>'ni okudum ve kabul ediyorum.
+              </label>
+            </div>
+
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !termsAccepted}
               className="w-full py-3 bg-white hover:bg-zinc-200 text-black font-medium rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isLoading ? (
