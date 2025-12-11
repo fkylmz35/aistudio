@@ -554,19 +554,20 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          {/* iyzico secure payment */}
+          {/* Payment methods */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-6 text-center"
+            className="mt-8 flex justify-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-              <Shield className="w-4 h-4 text-zinc-400" />
-              <span className="text-sm text-zinc-400">
-                iyzico ile güvenli ödeme
-              </span>
-            </div>
+            <Image
+              src="/payment-methods.png"
+              alt="Ödeme Yöntemleri - iyzico, Mastercard, Visa, American Express, Troy"
+              width={500}
+              height={60}
+              className="opacity-70 hover:opacity-100 transition-opacity"
+            />
           </motion.div>
         </div>
       </section>
