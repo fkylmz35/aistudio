@@ -83,10 +83,10 @@ const steps = [
 // Pricing packages
 const pricingPackages = [
   {
-    name: "Ücretsiz",
+    name: "Deneme",
     credits: 400,
     price: 0,
-    features: ["Standart kalite", "400 kredi", "Temel özellikler", "Email desteği"],
+    features: ["Standart kalite", "400 kredi", "Temel özellikler"],
     isPopular: false,
     isFree: true,
   },
@@ -94,25 +94,25 @@ const pricingPackages = [
     name: "Başlangıç",
     credits: 1000,
     price: 99,
-    features: ["Tüm kaliteler", "1.000 kredi", "Öncelikli destek", "Hızlı üretim"],
+    features: ["Tüm kaliteler", "1.000 kredi/ay", "Öncelikli destek", "Hızlı üretim"],
     isPopular: false,
     isFree: false,
   },
   {
-    name: "Pro",
-    credits: 3000,
-    price: 249,
-    originalPrice: 299,
-    features: ["Tüm kaliteler", "3.000 kredi", "VIP destek", "%15 tasarruf", "Öncelikli sıra"],
+    name: "Standart",
+    credits: 2500,
+    price: 199,
+    originalPrice: 249,
+    features: ["Tüm kaliteler", "2.500 kredi/ay", "VIP destek", "%20 tasarruf", "Öncelikli sıra"],
     isPopular: true,
     isFree: false,
   },
   {
-    name: "İşletme",
-    credits: 10000,
-    price: 699,
-    originalPrice: 999,
-    features: ["Tüm kaliteler", "10.000 kredi", "Özel destek", "%30 tasarruf", "API erişimi", "Erken özellik erişimi"],
+    name: "Pro",
+    credits: 6000,
+    price: 399,
+    originalPrice: 599,
+    features: ["Tüm kaliteler", "6.000 kredi/ay", "Özel destek", "%33 tasarruf", "Öncelikli sıra", "Erken özellik erişimi"],
     isPopular: false,
     isFree: false,
   },
@@ -244,27 +244,28 @@ export default function LandingPage() {
                 </span>
               </div>
 
-              {/* Main text with sequential letter glow animation */}
+              {/* Main text with sequential gray breathing glow animation */}
               <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none flex justify-center">
                 {['n', 'A', 'I', 'r', 'o', 'o'].map((letter, index) => (
                   <motion.span
                     key={index}
-                    className="text-white relative inline-block"
+                    className="relative inline-block"
                     style={{
-                      textShadow: '0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(255,255,255,0.4), 0 4px 20px rgba(0,0,0,0.5)',
+                      color: '#606060',
+                      textShadow: '0 0 20px rgba(150,150,150,0.3), 0 4px 20px rgba(0,0,0,0.5)',
                     }}
                     animate={{
                       textShadow: [
-                        '0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.5)',
-                        '0 0 60px rgba(255,255,255,1), 0 0 120px rgba(255,255,255,0.6), 0 0 200px rgba(255,255,255,0.4), 0 4px 20px rgba(0,0,0,0.5)',
-                        '0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 10px rgba(100,100,100,0.2), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 40px rgba(200,200,200,0.8), 0 0 80px rgba(180,180,180,0.5), 0 0 120px rgba(150,150,150,0.3), 0 4px 20px rgba(0,0,0,0.5)',
+                        '0 0 10px rgba(100,100,100,0.2), 0 4px 20px rgba(0,0,0,0.5)',
                       ],
-                      color: ['#e0e0e0', '#ffffff', '#e0e0e0'],
+                      color: ['#505050', '#e0e0e0', '#505050'],
                     }}
                     transition={{
-                      duration: 2,
+                      duration: 2.5,
                       repeat: Infinity,
-                      delay: index * 0.3,
+                      delay: index * 0.4,
                       ease: "easeInOut",
                     }}
                   >
@@ -451,7 +452,7 @@ export default function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Fiyatlandırma</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Aylık Paketler</h2>
             <p className="text-zinc-400 max-w-2xl mx-auto">
               İhtiyacınıza uygun paketi seçin. Ücretsiz başlayın, dilediğiniz zaman yükseltin.
             </p>
@@ -496,10 +497,18 @@ export default function LandingPage() {
                   {pkg.isFree ? (
                     <span className="text-xl font-bold text-green-400">Ücretsiz</span>
                   ) : (
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold text-white">{pkg.price} ₺</span>
+                    <div className="flex flex-col">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-2xl font-bold text-white">{pkg.price} ₺</span>
+                        <span className="text-sm text-zinc-500">/ay</span>
+                        {pkg.originalPrice && (
+                          <span className="text-sm text-zinc-500 line-through">{pkg.originalPrice} ₺</span>
+                        )}
+                      </div>
                       {pkg.originalPrice && (
-                        <span className="text-sm text-zinc-500 line-through">{pkg.originalPrice} ₺</span>
+                        <span className="text-xs text-green-400 mt-1">
+                          {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}% indirim
+                        </span>
                       )}
                     </div>
                   )}
@@ -529,6 +538,36 @@ export default function LandingPage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Credit carry-over info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-8 text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+              <Zap className="w-4 h-4 text-green-400" />
+              <span className="text-sm text-green-400">
+                Kullanılmayan kredilerin %50'si bir sonraki aya devredilir
+              </span>
+            </div>
+          </motion.div>
+
+          {/* iyzico secure payment */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-6 text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+              <Shield className="w-4 h-4 text-zinc-400" />
+              <span className="text-sm text-zinc-400">
+                iyzico ile güvenli ödeme
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
