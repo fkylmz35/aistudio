@@ -244,29 +244,9 @@ export default function LandingPage() {
                 </span>
               </div>
 
-              {/* Main text with slow sequential gray glow animation */}
-              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none flex justify-center">
-                {['n', 'A', 'I', 'r', 'o', 'o'].map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="relative inline-block text-zinc-400"
-                    animate={{
-                      textShadow: [
-                        '0 0 0px rgba(150,150,150,0), 0 4px 15px rgba(0,0,0,0.5)',
-                        '0 0 30px rgba(180,180,180,0.6), 0 0 60px rgba(160,160,160,0.4), 0 0 90px rgba(140,140,140,0.2), 0 4px 15px rgba(0,0,0,0.5)',
-                        '0 0 0px rgba(150,150,150,0), 0 4px 15px rgba(0,0,0,0.5)',
-                      ],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: index * 0.6,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
+              {/* Main text - static dark gray */}
+              <h1 className="relative text-7xl sm:text-9xl lg:text-[12rem] font-black tracking-tight leading-none text-zinc-600">
+                nAIroo
               </h1>
               <p className="text-zinc-500 text-lg sm:text-2xl mt-4 tracking-[0.4em] uppercase font-light">AI Studio</p>
             </motion.div>
