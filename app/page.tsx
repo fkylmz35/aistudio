@@ -160,26 +160,31 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-32 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-        {/* Deep Dark Background with Radial Gradient to White */}
-        <div className="absolute inset-0 bg-[#000000]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black" />
+        {/* Base gradient - dark to light */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f12] to-[#1a1a2e]" />
 
-        {/* 3D Blur Orbs - Apple Style */}
+        {/* Vibrant 3D Blur Orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Main center glow - subtle white */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.02] rounded-full blur-[200px]" />
+          {/* Large center white/cream glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-br from-white/[0.08] via-amber-100/[0.03] to-transparent rounded-full blur-[200px]" />
 
-          {/* Deep purple orb */}
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-900/30 rounded-full blur-[150px]" />
+          {/* Vibrant purple orb - left */}
+          <div className="absolute top-1/4 left-[10%] w-[600px] h-[600px] bg-purple-600/40 rounded-full blur-[180px]" />
 
-          {/* Deep blue orb */}
-          <div className="absolute top-1/3 right-1/5 w-[400px] h-[400px] bg-blue-950/40 rounded-full blur-[120px]" />
+          {/* Vibrant blue orb - right */}
+          <div className="absolute top-1/3 right-[5%] w-[500px] h-[500px] bg-blue-600/35 rounded-full blur-[150px]" />
 
-          {/* Subtle pink accent */}
-          <div className="absolute bottom-1/3 left-1/3 w-[350px] h-[350px] bg-pink-950/20 rounded-full blur-[100px]" />
+          {/* Vibrant pink/magenta orb - bottom left */}
+          <div className="absolute bottom-1/4 left-[20%] w-[450px] h-[450px] bg-pink-500/30 rounded-full blur-[140px]" />
 
-          {/* Bottom gradient fade to subtle light */}
-          <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-zinc-900/20 via-transparent to-transparent" />
+          {/* Cyan accent - bottom right */}
+          <div className="absolute bottom-1/3 right-[15%] w-[400px] h-[400px] bg-cyan-500/25 rounded-full blur-[130px]" />
+
+          {/* Warm orange glow - center bottom */}
+          <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/15 rounded-full blur-[120px]" />
+
+          {/* Top light gradient */}
+          <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-white/[0.03] via-transparent to-transparent" />
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10 w-full">
@@ -189,43 +194,43 @@ export default function LandingPage() {
             variants={stagger}
             className="space-y-8"
           >
-            {/* 3D Blur Brand Title - Apple Style */}
+            {/* 3D Blur Brand Title */}
             <motion.div
               variants={fadeInUp}
               className="relative"
             >
-              {/* Blur shadow layer */}
+              {/* Blur glow layer */}
               <div className="absolute inset-0 flex justify-center">
-                <span className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white/20 blur-2xl select-none">
-                  n<span className="text-purple-400/20">AI</span>roo
+                <span className="text-5xl sm:text-7xl lg:text-8xl font-bold text-purple-500/30 blur-3xl select-none">
+                  nAIroo
                 </span>
               </div>
-              {/* Main text */}
+              {/* Main text - darker tones */}
               <h2 className="relative text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight">
-                <span className="text-white/90">n</span>
-                <span className="bg-gradient-to-r from-purple-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">AI</span>
-                <span className="text-white/90">roo</span>
+                <span className="text-zinc-300">n</span>
+                <span className="bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">AI</span>
+                <span className="text-zinc-300">roo</span>
               </h2>
-              <p className="text-zinc-500 text-lg sm:text-xl mt-2 tracking-[0.3em] uppercase font-light">AI Studio</p>
+              <p className="text-zinc-600 text-lg sm:text-xl mt-2 tracking-[0.3em] uppercase font-light">AI Studio</p>
             </motion.div>
 
-            {/* Heading */}
+            {/* Heading - darker text */}
             <motion.h1
               variants={fadeInUp}
-              className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-white/95 leading-tight tracking-tight"
+              className="text-3xl sm:text-4xl lg:text-6xl font-semibold text-zinc-200 leading-tight tracking-tight"
             >
               Hayal Et,{" "}
               <span className="relative">
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent blur-xl opacity-50">
+                <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent blur-2xl opacity-40">
                   AI Üretsin
                 </span>
-                <span className="relative bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="relative bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 bg-clip-text text-transparent">
                   AI Üretsin
                 </span>
               </span>
             </motion.h1>
 
-            {/* Subheading */}
+            {/* Subheading - darker */}
             <motion.p
               variants={fadeInUp}
               className="text-base sm:text-lg text-zinc-500 max-w-2xl mx-auto leading-relaxed"
@@ -235,43 +240,43 @@ export default function LandingPage() {
               Sınırsız yaratıcılık, yapay zeka gücüyle.
             </motion.p>
 
-            {/* CTA Buttons - Apple Style */}
+            {/* CTA Buttons */}
             <motion.div
               variants={fadeInUp}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6"
             >
               <Link
                 href="/register"
-                className="group flex items-center gap-2 px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-zinc-100 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.15)]"
+                className="group flex items-center gap-2 px-8 py-4 bg-white text-zinc-900 font-medium rounded-full hover:bg-zinc-100 transition-all shadow-[0_0_60px_rgba(255,255,255,0.15)] hover:shadow-[0_0_80px_rgba(255,255,255,0.25)]"
               >
                 Ücretsiz Başla
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/login"
-                className="flex items-center gap-2 px-8 py-4 text-zinc-300 font-medium rounded-full border border-zinc-800 hover:border-zinc-700 hover:text-white hover:bg-white/5 transition-all"
+                className="flex items-center gap-2 px-8 py-4 text-zinc-400 font-medium rounded-full border border-zinc-700 hover:border-zinc-500 hover:text-zinc-200 hover:bg-white/5 transition-all"
               >
                 Giriş Yap
               </Link>
             </motion.div>
 
-            {/* Stats - Minimal Apple Style */}
+            {/* Stats */}
             <motion.div
               variants={fadeInUp}
               className="flex items-center justify-center gap-12 pt-16 text-center"
             >
               <div className="group">
-                <div className="text-3xl font-semibold text-white/90 group-hover:text-white transition-colors">400</div>
+                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">400</div>
                 <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Ücretsiz Kredi</div>
               </div>
-              <div className="w-px h-12 bg-zinc-800" />
+              <div className="w-px h-12 bg-zinc-700/50" />
               <div className="group">
-                <div className="text-3xl font-semibold text-white/90 group-hover:text-white transition-colors">4K</div>
+                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">4K</div>
                 <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Çözünürlük</div>
               </div>
-              <div className="w-px h-12 bg-zinc-800" />
+              <div className="w-px h-12 bg-zinc-700/50" />
               <div className="group">
-                <div className="text-3xl font-semibold text-white/90 group-hover:text-white transition-colors">&lt;30s</div>
+                <div className="text-3xl font-semibold text-zinc-300 group-hover:text-white transition-colors">&lt;30s</div>
                 <div className="text-xs text-zinc-600 uppercase tracking-wider mt-1">Üretim Süresi</div>
               </div>
             </motion.div>
