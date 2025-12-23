@@ -21,7 +21,7 @@ export const agents: Agent[] = [
     longDescription: "Yapay zeka destekli görsel üretim aracı. Promptlarınızı saniyeler içinde profesyonel görsellere dönüştürün. Standart'tan 4K'ya kadar farklı çözünürlük seçenekleri ile ihtiyacınıza uygun görseller oluşturun.",
     icon: ImageIcon,
     tags: ["Görsel", "AI", "Üretim"],
-    creditCost: 80,
+    creditCost: 8,
     isActive: true,
     thumbnail: "/agents/gorsel-olustur.jpg",
     features: [
@@ -38,7 +38,7 @@ export const agents: Agent[] = [
     longDescription: "AI destekli video üretim aracı. Metin promptlarından kısa videolar ve animasyonlar oluşturun.",
     icon: Video,
     tags: ["Video", "AI", "Üretim"],
-    creditCost: 200,
+    creditCost: 20,
     isActive: false,
     thumbnail: "/agents/video-olustur.jpg",
     features: [
@@ -54,7 +54,7 @@ export const agents: Agent[] = [
     longDescription: "Sosyal medya ve reklam kampanyaları için otantik görünümlü UGC görselleri oluşturun. Gerçek kullanıcı içerikleri gibi görünen profesyonel görseller.",
     icon: Sparkles,
     tags: ["UGC", "Sosyal Medya", "Görsel"],
-    creditCost: 120,
+    creditCost: 12,
     isActive: false,
     thumbnail: "/agents/ugc-gorsel.jpg",
     features: [
@@ -70,7 +70,7 @@ export const agents: Agent[] = [
     longDescription: "TikTok, Instagram Reels ve YouTube Shorts için UGC tarzı videolar oluşturun. Reklam kampanyalarınız için gerçekçi içerikler.",
     icon: Film,
     tags: ["UGC", "Video", "Sosyal Medya"],
-    creditCost: 300,
+    creditCost: 30,
     isActive: false,
     thumbnail: "/agents/ugc-video.jpg",
     features: [
@@ -86,7 +86,7 @@ export const agents: Agent[] = [
     longDescription: "Fotoğraflarınızı AI ile düzenleyin. Arka plan değiştirme, nesne silme, renk düzeltme ve daha fazlası.",
     icon: Edit,
     tags: ["Düzenleme", "Görsel", "AI"],
-    creditCost: 60,
+    creditCost: 6,
     isActive: false,
     thumbnail: "/agents/gorsel-duzenleme.jpg",
     features: [
@@ -102,7 +102,7 @@ export const agents: Agent[] = [
     longDescription: "E-ticaret mağazanız için ürün görsellerini optimize edin. Profesyonel arka planlar, lifestyle fotoğraflar ve ürün sunumları.",
     icon: ShoppingBag,
     tags: ["E-Ticaret", "Ürün", "Görsel"],
-    creditCost: 100,
+    creditCost: 10,
     isActive: false,
     thumbnail: "/agents/e-ticaret.jpg",
     features: [
@@ -118,7 +118,7 @@ export const agents: Agent[] = [
     longDescription: "Sosyal medya platformları için özel tasarlanmış görseller ve videolar. Doğru boyutlar, trendler ve stil önerileri.",
     icon: Instagram,
     tags: ["Sosyal Medya", "Instagram", "TikTok"],
-    creditCost: 80,
+    creditCost: 8,
     isActive: false,
     thumbnail: "/agents/sosyal-medya.jpg",
     features: [

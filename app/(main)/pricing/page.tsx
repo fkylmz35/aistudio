@@ -24,51 +24,51 @@ const fallbackPackages: CreditPackage[] = [
   {
     id: "trial",
     name: "Deneme",
-    credits: 400,
+    credits: 40,
     price_tl: 0,
     discount_percent: 0,
     is_active: true,
     is_popular: false,
-    features: ["Sadece Standart kalite", "400 kredi", "Temel özellikler"],
+    features: ["Sadece Standart kalite", "40 kredi", "Temel özellikler"],
   },
   {
     id: "starter",
     name: "Başlangıç",
-    credits: 1000,
+    credits: 100,
     price_tl: 99,
     discount_percent: 0,
     is_active: true,
     is_popular: false,
-    features: ["Tüm kaliteler", "1.000 kredi", "Öncelikli destek"],
+    features: ["Tüm kaliteler", "100 kredi", "Öncelikli destek"],
   },
   {
     id: "standard",
     name: "Standart",
-    credits: 2500,
+    credits: 250,
     price_tl: 199,
     discount_percent: 20,
     is_active: true,
     is_popular: false,
-    features: ["Tüm kaliteler", "2.500 kredi", "Öncelikli destek", "%20 tasarruf"],
+    features: ["Tüm kaliteler", "250 kredi", "Öncelikli destek", "%20 tasarruf"],
   },
   {
     id: "pro",
     name: "Pro",
-    credits: 6000,
+    credits: 600,
     price_tl: 399,
     discount_percent: 35,
     is_active: true,
     is_popular: true,
-    features: ["Tüm kaliteler", "6.000 kredi", "VIP destek", "%35 tasarruf", "Erken erişim"],
+    features: ["Tüm kaliteler", "600 kredi", "VIP destek", "%35 tasarruf", "Erken erişim"],
   },
 ]
 
 // Credit costs per quality
 const creditCosts = {
-  standart: 80,
-  "1k": 250,
-  "2k": 250,
-  "4k": 500,
+  standart: 8,
+  "1k": 25,
+  "2k": 25,
+  "4k": 50,
 }
 
 export default function PricingPage() {
