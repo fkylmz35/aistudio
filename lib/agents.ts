@@ -1,4 +1,4 @@
-import { ImageIcon, Video, Sparkles, Film, Wand2, ShoppingBag, Instagram, Edit } from "lucide-react"
+import { ImageIcon, Video, Sparkles, Film, Wand2, ShoppingBag, Edit } from "lucide-react"
 
 export interface Agent {
   slug: string
@@ -11,16 +11,17 @@ export interface Agent {
   isActive: boolean
   thumbnail: string
   features: string[]
+  isNairooModel: boolean
 }
 
 export const agents: Agent[] = [
   {
     slug: "gorsel-olustur",
-    name: "Görsel Oluştur",
+    name: "Nairoo Görsel",
     description: "Metinden yüksek kaliteli görseller oluşturun. 4K'ya kadar çözünürlük desteği.",
     longDescription: "Yapay zeka destekli görsel üretim aracı. Promptlarınızı saniyeler içinde profesyonel görsellere dönüştürün. Standart'tan 4K'ya kadar farklı çözünürlük seçenekleri ile ihtiyacınıza uygun görseller oluşturun.",
     icon: ImageIcon,
-    tags: ["Görsel", "AI", "Üretim"],
+    tags: ["Nairoo", "Görsel", "Üretim"],
     creditCost: 8,
     isActive: true,
     thumbnail: "/agents/gorsel-olustur.jpg",
@@ -29,15 +30,16 @@ export const agents: Agent[] = [
       "Çoklu aspect ratio desteği",
       "Referans görsel yükleme",
       "Akıllı prompt analizi"
-    ]
+    ],
+    isNairooModel: true
   },
   {
     slug: "video-olustur",
-    name: "Video Oluştur",
+    name: "Nairoo Video",
     description: "Promptlarınızdan etkileyici videolar oluşturun.",
     longDescription: "AI destekli video üretim aracı. Metin promptlarından kısa videolar ve animasyonlar oluşturun.",
     icon: Video,
-    tags: ["Video", "AI", "Üretim"],
+    tags: ["Nairoo", "Video", "Üretim"],
     creditCost: 20,
     isActive: false,
     thumbnail: "/agents/video-olustur.jpg",
@@ -45,15 +47,16 @@ export const agents: Agent[] = [
       "Metin → Video dönüşüm",
       "Farklı video stilleri",
       "Yüksek kalite çıktı"
-    ]
+    ],
+    isNairooModel: true
   },
   {
     slug: "ugc-gorsel",
-    name: "UGC Görsel",
+    name: "Nairoo UGC Görsel v2",
     description: "Kullanıcı tarafından oluşturulmuş içerik stilinde görseller üretin.",
     longDescription: "Sosyal medya ve reklam kampanyaları için otantik görünümlü UGC görselleri oluşturun. Gerçek kullanıcı içerikleri gibi görünen profesyonel görseller.",
     icon: Sparkles,
-    tags: ["UGC", "Sosyal Medya", "Görsel"],
+    tags: ["Nairoo", "UGC", "Görsel"],
     creditCost: 12,
     isActive: false,
     thumbnail: "/agents/ugc-gorsel.jpg",
@@ -61,15 +64,16 @@ export const agents: Agent[] = [
       "Otantik UGC stili",
       "Sosyal medya optimizasyonu",
       "Çoklu format desteği"
-    ]
+    ],
+    isNairooModel: true
   },
   {
     slug: "ugc-video",
-    name: "UGC Video",
+    name: "Nairoo UGC Video v2",
     description: "Kullanıcı tarafından oluşturulmuş içerik stilinde videolar üretin.",
     longDescription: "TikTok, Instagram Reels ve YouTube Shorts için UGC tarzı videolar oluşturun. Reklam kampanyalarınız için gerçekçi içerikler.",
     icon: Film,
-    tags: ["UGC", "Video", "Sosyal Medya"],
+    tags: ["Nairoo", "UGC", "Video"],
     creditCost: 30,
     isActive: false,
     thumbnail: "/agents/ugc-video.jpg",
@@ -77,15 +81,16 @@ export const agents: Agent[] = [
       "Kısa video formatları",
       "Platform optimizasyonu",
       "Gerçekçi UGC stili"
-    ]
+    ],
+    isNairooModel: true
   },
   {
     slug: "gorsel-duzenleme",
-    name: "Görsel Düzenleme",
+    name: "Nairoo Edit v1.5",
     description: "Mevcut görsellerinizi AI ile düzenleyin ve geliştirin.",
     longDescription: "Fotoğraflarınızı AI ile düzenleyin. Arka plan değiştirme, nesne silme, renk düzeltme ve daha fazlası.",
     icon: Edit,
-    tags: ["Düzenleme", "Görsel", "AI"],
+    tags: ["Nairoo", "Düzenleme", "Görsel"],
     creditCost: 6,
     isActive: false,
     thumbnail: "/agents/gorsel-duzenleme.jpg",
@@ -93,15 +98,16 @@ export const agents: Agent[] = [
       "Arka plan değiştirme",
       "Nesne silme/ekleme",
       "Renk düzeltme"
-    ]
+    ],
+    isNairooModel: true
   },
   {
     slug: "e-ticaret-gorsel",
-    name: "E-Ticaret Görsel",
+    name: "Nairoo Ürün Görsel",
     description: "Ürün fotoğraflarınız için profesyonel görseller oluşturun.",
     longDescription: "E-ticaret mağazanız için ürün görsellerini optimize edin. Profesyonel arka planlar, lifestyle fotoğraflar ve ürün sunumları.",
     icon: ShoppingBag,
-    tags: ["E-Ticaret", "Ürün", "Görsel"],
+    tags: ["Nairoo", "E-Ticaret", "Ürün"],
     creditCost: 10,
     isActive: false,
     thumbnail: "/agents/e-ticaret.jpg",
@@ -109,33 +115,18 @@ export const agents: Agent[] = [
       "Ürün fotoğrafı düzenleme",
       "Profesyonel arka planlar",
       "Lifestyle görseller"
-    ]
-  },
-  {
-    slug: "sosyal-medya",
-    name: "Sosyal Medya",
-    description: "Instagram, TikTok ve diğer platformlar için optimized içerikler.",
-    longDescription: "Sosyal medya platformları için özel tasarlanmış görseller ve videolar. Doğru boyutlar, trendler ve stil önerileri.",
-    icon: Instagram,
-    tags: ["Sosyal Medya", "Instagram", "TikTok"],
-    creditCost: 8,
-    isActive: false,
-    thumbnail: "/agents/sosyal-medya.jpg",
-    features: [
-      "Platform boyut optimizasyonu",
-      "Trend analizi",
-      "Hashtag önerileri"
-    ]
+    ],
+    isNairooModel: true
   }
 ]
 
 export const agentTags = [
   "Tümü",
+  "Nairoo",
   "Görsel",
   "Video",
   "UGC",
   "Düzenleme",
-  "Sosyal Medya",
   "E-Ticaret"
 ]
 
@@ -149,7 +140,16 @@ export const getActiveAgents = (): Agent[] => {
 
 export const getAgentsByTag = (tag: string): Agent[] => {
   if (tag === "Tümü") return agents
+  if (tag === "Nairoo") return agents.filter(agent => agent.isNairooModel)
   return agents.filter(agent => agent.tags.includes(tag))
+}
+
+export const getNairooAgents = (): Agent[] => {
+  return agents.filter(agent => agent.isNairooModel)
+}
+
+export const getOtherAgents = (): Agent[] => {
+  return agents.filter(agent => !agent.isNairooModel)
 }
 
 // Hero banner data for carousel
@@ -157,7 +157,7 @@ export const heroBanners = [
   {
     id: 1,
     agentSlug: "gorsel-olustur",
-    title: "AI ile Görsel Üretin",
+    title: "Nairoo ile Görsel Üretin",
     description: "Hayal gücünüzü saniyeler içinde profesyonel görsellere dönüştürün",
     gradient: "from-purple-600/20 via-pink-500/10 to-transparent",
     image: "/banners/gorsel-banner.jpg"
@@ -165,7 +165,7 @@ export const heroBanners = [
   {
     id: 2,
     agentSlug: "video-olustur",
-    title: "Yapay Zeka Video Üretimi",
+    title: "Nairoo Video Üretimi",
     description: "Metinden etkileyici videolar oluşturun - Yakında",
     gradient: "from-blue-600/20 via-cyan-500/10 to-transparent",
     image: "/banners/video-banner.jpg"
@@ -173,7 +173,7 @@ export const heroBanners = [
   {
     id: 3,
     agentSlug: "ugc-gorsel",
-    title: "UGC İçerik Stüdyosu",
+    title: "Nairoo UGC Stüdyosu",
     description: "Otantik kullanıcı içerikleri gibi görünen profesyonel görseller",
     gradient: "from-amber-600/20 via-orange-500/10 to-transparent",
     image: "/banners/ugc-banner.jpg"
@@ -181,7 +181,7 @@ export const heroBanners = [
   {
     id: 4,
     agentSlug: "e-ticaret-gorsel",
-    title: "E-Ticaret için AI",
+    title: "E-Ticaret için Nairoo",
     description: "Ürünlerinizi profesyonel görseller ile öne çıkarın",
     gradient: "from-green-600/20 via-emerald-500/10 to-transparent",
     image: "/banners/eticaret-banner.jpg"

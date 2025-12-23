@@ -252,12 +252,10 @@ export default function CreateImagePage() {
             >
               {capabilities.map((capability, index) => (
                 <motion.div key={index} variants={itemVariants} whileHover={{ scale: 1.01 }} className="group relative">
-                  <div className="relative p-4 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] transition-all duration-300 group-hover:from-white/[0.07] group-hover:via-white/[0.04] group-hover:to-white/[0.01] group-hover:border-white/[0.1] opacity-100 rounded-3xl">
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.1] to-transparent rounded-t-xl" />
-
+                  <div className="relative p-4 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg transition-all duration-150 ease-out hover:border-white/[0.15] hover:-translate-y-0.5 shadow-sm">
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-white/[0.05] border border-white/[0.06] group-hover:bg-white/[0.08] transition-colors duration-300">
-                        <capability.icon className="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors duration-300" />
+                      <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-white/[0.05] border border-white/[0.08] group-hover:bg-white/[0.08] transition-colors duration-150">
+                        <capability.icon className="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors duration-150" />
                       </div>
 
                       <div className="flex-1 min-w-0">
@@ -284,7 +282,7 @@ export default function CreateImagePage() {
           animate={{ opacity: 1, y: 0 }}
           className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-[680px] px-4 md:ml-9"
         >
-          <div className="flex gap-2 p-2 bg-[rgba(30,30,30,0.9)] backdrop-blur-2xl border border-[rgba(255,255,255,0.1)] rounded-xl">
+          <div className="flex gap-2 p-2 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm">
             {selectedFiles.map((file, index) => (
               <div key={index} className="relative group">
                 <img
@@ -310,7 +308,7 @@ export default function CreateImagePage() {
         className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[680px] px-4 md:ml-9"
       >
         <div className="animate-float">
-          <div className="relative flex items-center gap-2 p-2 bg-[rgba(30,30,30,0.8)] backdrop-blur-2xl border border-[rgba(255,255,255,0.1)] shadow-2xl rounded-2xl">
+          <div className="relative flex items-center gap-2 p-2 bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm rounded-xl">
             <input
               ref={fileInputRef}
               type="file"
@@ -360,7 +358,7 @@ export default function CreateImagePage() {
                   />
                 </button>
                 {showQualityDropdown && (
-                  <div className="absolute bottom-full mb-2 right-0 bg-[#1a1a1a] border border-white/10 rounded-lg p-1 min-w-[100px]">
+                  <div className="absolute bottom-full mb-2 right-0 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg p-1 min-w-[100px] shadow-sm">
                     {qualities.map((q) => (
                       <button
                         key={q}
@@ -392,7 +390,7 @@ export default function CreateImagePage() {
                   <ChevronDown className={cn("w-3 h-3 transition-transform", showAspectDropdown && "rotate-180")} />
                 </button>
                 {showAspectDropdown && (
-                  <div className="absolute bottom-full mb-2 left-0 bg-[#1a1a1a] border border-white/10 rounded-lg p-1 min-w-[160px] max-h-[300px] overflow-y-auto">
+                  <div className="absolute bottom-full mb-2 left-0 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg p-1 min-w-[160px] max-h-[300px] overflow-y-auto shadow-sm">
                     {aspectRatioOptions.map((option) => (
                       <button
                         key={option.value}
@@ -418,10 +416,10 @@ export default function CreateImagePage() {
                 onClick={handleGenerate}
                 disabled={!prompt.trim() || isGenerating || isCooldown || !user}
                 className={cn(
-                  "flex items-center justify-center rounded-xl transition-all duration-200 w-10 h-10",
+                  "flex items-center justify-center rounded-lg transition-all duration-150 w-10 h-10",
                   prompt.trim() && !isGenerating && !isCooldown && user
                     ? "bg-white text-black hover:bg-zinc-200"
-                    : "bg-white/10 text-zinc-500 cursor-not-allowed",
+                    : "bg-white/[0.08] text-zinc-500 cursor-not-allowed",
                 )}
               >
                 {isGenerating || isCooldown ? (

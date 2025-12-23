@@ -158,10 +158,10 @@ export default function PricingPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative p-6 rounded-2xl border backdrop-blur-md ${
+                  className={`relative p-6 rounded-lg border shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 ${
                     pkg.is_popular
-                      ? "bg-gradient-to-br from-amber-500/10 via-yellow-500/5 to-transparent border-amber-500/30"
-                      : "bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent border-white/[0.05]"
+                      ? "bg-[#0c0c0c]/95 border-amber-500/30 hover:border-amber-500/50"
+                      : "bg-[#0c0c0c]/95 border-white/[0.08] hover:border-white/[0.15]"
                   }`}
                 >
                   {/* Popular Badge */}
@@ -214,7 +214,7 @@ export default function PricingPage() {
                   </div>
 
                   {/* Image Calculations */}
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.05] mb-6">
+                  <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.08] mb-6">
                     <p className="text-xs text-zinc-500 mb-2 flex items-center gap-1">
                       <ImageIcon className="w-3 h-3" />
                       Üretebileceğin görsel sayısı:
@@ -253,14 +253,14 @@ export default function PricingPage() {
                   {isFree ? (
                     <button
                       disabled
-                      className="w-full py-3 rounded-xl bg-white/[0.05] text-zinc-500 text-sm font-medium cursor-not-allowed"
+                      className="w-full py-3 rounded-lg bg-white/[0.05] text-zinc-500 text-sm font-medium cursor-not-allowed"
                     >
                       {isCurrentPlan ? "Mevcut Paketiniz" : "Kayıt Ol"}
                     </button>
                   ) : (
                     <button
                       onClick={() => handlePurchase(pkg)}
-                      className={`w-full py-3 rounded-xl text-sm font-medium transition-all ${
+                      className={`w-full py-3 rounded-lg text-sm font-medium transition-all duration-150 ${
                         pkg.is_popular
                           ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-black hover:from-amber-400 hover:to-yellow-400"
                           : "bg-white text-black hover:bg-zinc-200"
@@ -281,7 +281,7 @@ export default function PricingPage() {
             transition={{ delay: 0.3 }}
             className="mb-6 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20">
               <Zap className="w-4 h-4 text-green-400" />
               <span className="text-sm text-green-400">
                 Kullanılmayan kredilerin %50&apos;si bir sonraki aya devredilir
@@ -294,7 +294,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent border border-white/[0.05]"
+            className="p-6 rounded-lg bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm"
           >
             <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
               <Zap className="w-5 h-5 text-amber-400" />
@@ -365,7 +365,7 @@ export default function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]"
+            className="mt-6 p-4 rounded-lg bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm"
           >
             <p className="text-sm text-zinc-500 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-amber-400" />

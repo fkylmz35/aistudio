@@ -39,8 +39,8 @@ export function Sidebar() {
           className="flex items-center gap-3"
           animate={{ justifyContent: isExpanded ? "flex-start" : "center" }}
         >
-          <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden">
-            <Image src="/logo.png" alt="Nairoo Logo" width={36} height={36} className="object-contain" />
+          <div className="w-10 h-10 rounded-lg overflow-hidden">
+            <Image src="/logo.png" alt="Nairoo" width={40} height={40} className="w-full h-full object-cover" />
           </div>
           <AnimatePresence>
             {isExpanded && (
@@ -60,7 +60,7 @@ export function Sidebar() {
 
       {/* Search Button */}
       <div className="p-3">
-        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-secondary/50 backdrop-blur-sm border border-border hover:bg-secondary/80 transition-colors">
+        <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.05] hover:border-white/[0.12] transition-all duration-150">
           <Search className="w-5 h-5 text-muted-foreground shrink-0" />
           <AnimatePresence>
             {isExpanded && (
@@ -72,7 +72,7 @@ export function Sidebar() {
                 className="flex items-center justify-between flex-1"
               >
                 <span className="text-sm text-muted-foreground">Ara</span>
-                <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground bg-background/50 rounded border border-border">
+                <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground bg-white/[0.03] rounded border border-white/[0.08]">
                   <Command className="w-2.5 h-2.5" />K
                 </kbd>
               </motion.div>
@@ -141,8 +141,10 @@ function NavItem({
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150",
-        isActive ? "bg-white/10 text-foreground" : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
+        "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150",
+        isActive
+          ? "bg-white/[0.08] text-foreground border-l-2 border-white"
+          : "text-muted-foreground hover:bg-white/[0.05] hover:text-foreground",
       )}
     >
       <Icon className="w-5 h-5 shrink-0" />

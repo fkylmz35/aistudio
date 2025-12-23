@@ -133,8 +133,8 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden">
-              <Image src="/logo.png" alt="Nairoo AI Studio" width={40} height={40} className="object-contain" />
+            <div className="w-12 h-12 rounded-xl overflow-hidden">
+              <Image src="/logo.png" alt="Nairoo" width={48} height={48} className="w-full h-full object-cover" />
             </div>
             <span className="text-2xl font-semibold text-white">Nairoo AI Studio</span>
           </Link>

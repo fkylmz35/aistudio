@@ -206,10 +206,10 @@ export default function SettingsPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-6 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl mb-6"
+            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                 <User className="w-5 h-5 text-zinc-400" />
               </div>
               <div>
@@ -226,14 +226,14 @@ export default function SettingsPage() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Ad Soyad"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.1] transition-colors"
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
                 />
               </div>
 
               <button
                 onClick={handleUpdateProfile}
                 disabled={isUpdatingProfile}
-                className="px-6 py-2.5 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isUpdatingProfile ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -250,10 +250,10 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-6 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl mb-6"
+            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                 <Mail className="w-5 h-5 text-zinc-400" />
               </div>
               <div>
@@ -265,7 +265,7 @@ export default function SettingsPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-zinc-400 mb-2">Mevcut E-posta</label>
-                <div className="px-4 py-3 bg-white/[0.02] border border-white/[0.03] rounded-xl text-zinc-500">
+                <div className="px-4 py-3 bg-white/[0.02] border border-white/[0.05] rounded-lg text-zinc-500">
                   {user?.email}
                 </div>
               </div>
@@ -277,7 +277,7 @@ export default function SettingsPage() {
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
                   placeholder="yeni@email.com"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.1] transition-colors"
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
                 />
               </div>
 
@@ -288,7 +288,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleUpdateEmail}
                 disabled={isUpdatingEmail || !newEmail}
-                className="px-6 py-2.5 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isUpdatingEmail ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -305,10 +305,10 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="p-6 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl mb-6"
+            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                 <Lock className="w-5 h-5 text-zinc-400" />
               </div>
               <div>
@@ -326,7 +326,7 @@ export default function SettingsPage() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.1] transition-colors pr-12"
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150 pr-12"
                   />
                   <button
                     type="button"
@@ -359,7 +359,7 @@ export default function SettingsPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.1] transition-colors"
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
                 />
                 {confirmPassword && newPassword !== confirmPassword && (
                   <p className="mt-1 text-xs text-red-400">Şifreler eşleşmiyor</p>
@@ -369,7 +369,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleUpdatePassword}
                 disabled={isUpdatingPassword || !newPassword || !confirmPassword}
-                className="px-6 py-2.5 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isUpdatingPassword ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -386,10 +386,10 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="p-6 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl mb-6"
+            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                 <Bell className="w-5 h-5 text-zinc-400" />
               </div>
               <div>
@@ -399,27 +399,27 @@ export default function SettingsPage() {
             </div>
 
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-lg border border-white/[0.05]">
                 <div>
                   <p className="text-sm font-medium text-white">E-posta Bildirimleri</p>
                   <p className="text-xs text-zinc-500">Görsel oluşturma tamamlandığında bildirim al</p>
                 </div>
                 <button
                   onClick={() => setEmailNotifications(!emailNotifications)}
-                  className={`w-12 h-6 rounded-full transition-colors ${emailNotifications ? "bg-green-500" : "bg-zinc-700"}`}
+                  className={`w-12 h-6 rounded-full transition-all duration-150 ${emailNotifications ? "bg-green-500" : "bg-zinc-700"}`}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full transition-transform ${emailNotifications ? "translate-x-6" : "translate-x-0.5"}`} />
                 </button>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-lg border border-white/[0.05]">
                 <div>
                   <p className="text-sm font-medium text-white">Pazarlama E-postaları</p>
                   <p className="text-xs text-zinc-500">Yenilikler ve kampanyalar hakkında bilgi al</p>
                 </div>
                 <button
                   onClick={() => setMarketingEmails(!marketingEmails)}
-                  className={`w-12 h-6 rounded-full transition-colors ${marketingEmails ? "bg-green-500" : "bg-zinc-700"}`}
+                  className={`w-12 h-6 rounded-full transition-all duration-150 ${marketingEmails ? "bg-green-500" : "bg-zinc-700"}`}
                 >
                   <div className={`w-5 h-5 bg-white rounded-full transition-transform ${marketingEmails ? "translate-x-6" : "translate-x-0.5"}`} />
                 </button>
@@ -432,10 +432,10 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="p-6 bg-gradient-to-br from-red-500/[0.04] via-red-500/[0.02] to-transparent backdrop-blur-md border border-red-500/[0.1] rounded-2xl"
+            className="p-6 bg-[#0c0c0c]/95 border border-red-500/[0.15] rounded-lg shadow-sm"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
                 <Trash2 className="w-5 h-5 text-red-400" />
               </div>
               <div>
@@ -450,7 +450,7 @@ export default function SettingsPage() {
 
             <button
               onClick={() => setShowDeleteModal(true)}
-              className="px-6 py-2.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium hover:bg-red-500/20 transition-colors flex items-center gap-2"
+              className="px-6 py-2.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm font-medium hover:bg-red-500/20 transition-all duration-150 flex items-center gap-2"
             >
               <Trash2 className="w-4 h-4" />
               Hesabı Sil
@@ -466,14 +466,14 @@ export default function SettingsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setShowDeleteModal(false)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-md p-6 bg-zinc-900 border border-zinc-800 rounded-2xl"
+              className="w-full max-w-md p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-xl shadow-sm"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -486,7 +486,7 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-xl mb-4">
+              <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-lg mb-4">
                 <p className="text-sm text-zinc-400">
                   Hesabınız silindiğinde:
                 </p>
@@ -506,21 +506,21 @@ export default function SettingsPage() {
                   value={deleteConfirmText}
                   onChange={(e) => setDeleteConfirmText(e.target.value)}
                   placeholder="HESABIMI SIL"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.05] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-red-500/30 transition-colors"
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-red-500/30 transition-all duration-150"
                 />
               </div>
 
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowDeleteModal(false)}
-                  className="flex-1 px-4 py-2.5 bg-zinc-800 text-white rounded-xl text-sm font-medium hover:bg-zinc-700 transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all duration-150"
                 >
                   İptal
                 </button>
                 <button
                   onClick={handleDeleteAccount}
                   disabled={isDeleting || deleteConfirmText !== "HESABIMI SIL"}
-                  className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-xl text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isDeleting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

@@ -103,14 +103,12 @@ export default function ProfilePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="relative p-6 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-3xl mb-6"
+            className="relative p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.1] to-transparent rounded-t-3xl" />
-
             <div className="flex items-center gap-6">
               <div className="relative">
-                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-zinc-400 to-zinc-600 p-[2px]">
-                  <div className="w-full h-full rounded-2xl bg-[#141414] overflow-hidden flex items-center justify-center">
+                <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-zinc-400 to-zinc-600 p-[2px]">
+                  <div className="w-full h-full rounded-lg bg-[#141414] overflow-hidden flex items-center justify-center">
                     {avatarUrl ? (
                       <img
                         src={avatarUrl || "/placeholder.svg"}
@@ -156,11 +154,11 @@ export default function ProfilePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="relative p-5 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl mb-6"
+            className="relative p-5 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isPro ? "bg-gradient-to-br from-amber-500/20 to-yellow-500/20" : "bg-white/[0.05]"}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isPro ? "bg-gradient-to-br from-amber-500/20 to-yellow-500/20" : "bg-white/[0.05]"}`}>
                   <Crown className={`w-5 h-5 ${isPro ? "text-amber-400" : "text-zinc-400"}`} />
                 </div>
                 <div>
@@ -173,7 +171,7 @@ export default function ProfilePage() {
               {!isPro && (
                 <Link
                   href="/pricing"
-                  className="flex items-center gap-1 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-sm font-medium hover:from-amber-400 hover:to-yellow-400 transition-all"
+                  className="flex items-center gap-1 px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-sm font-medium hover:from-amber-400 hover:to-yellow-400 transition-all duration-150"
                 >
                   Pro'ya Yükselt
                   <ChevronRight className="w-4 h-4" />
@@ -189,9 +187,9 @@ export default function ProfilePage() {
             transition={{ delay: 0.1 }}
             className="grid grid-cols-2 gap-4 mb-6"
           >
-            <div className="p-5 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl">
+            <div className="p-5 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                   <ImageIcon className="w-5 h-5 text-zinc-400" />
                 </div>
                 <span className="text-zinc-400 text-sm">Oluşturulan Görseller</span>
@@ -205,9 +203,9 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <div className="p-5 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl">
+            <div className="p-5 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/10 to-yellow-500/10 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500/10 to-yellow-500/10 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-amber-400" />
                 </div>
                 <span className="text-zinc-400 text-sm">Kalan Kredi</span>
@@ -222,7 +220,7 @@ export default function ProfilePage() {
               {/* Buy Credits Button */}
               <Link
                 href="/pricing"
-                className="flex items-center justify-center gap-2 mt-3 w-full py-2 rounded-xl bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium hover:from-amber-500/20 hover:to-yellow-500/20 transition-all"
+                className="flex items-center justify-center gap-2 mt-3 w-full py-2 rounded-lg bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 text-amber-400 text-sm font-medium hover:from-amber-500/20 hover:to-yellow-500/20 transition-all duration-150"
               >
                 <CreditCard className="w-4 h-4" />
                 Kredi Satın Al
@@ -239,10 +237,10 @@ export default function ProfilePage() {
           >
             <Link
               href="/settings"
-              className="w-full flex items-center justify-between p-4 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl hover:from-white/[0.07] hover:via-white/[0.04] hover:to-white/[0.01] transition-all"
+              className="w-full flex items-center justify-between p-4 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm hover:border-white/[0.15] transition-all duration-150"
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
                   <Settings className="w-5 h-5 text-zinc-400" />
                 </div>
                 <span className="text-white text-sm font-medium">Hesap Ayarları</span>
@@ -252,9 +250,9 @@ export default function ProfilePage() {
 
             <button
               onClick={handleSignOut}
-              className="w-full flex items-center gap-4 p-4 bg-gradient-to-br from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-md border border-white/[0.05] rounded-2xl hover:from-red-500/10 hover:border-red-500/20 transition-all group"
+              className="w-full flex items-center gap-4 p-4 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm hover:border-red-500/20 transition-all duration-150 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center group-hover:bg-red-500/10">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center group-hover:bg-red-500/10">
                 <LogOut className="w-5 h-5 text-zinc-400 group-hover:text-red-400" />
               </div>
               <span className="text-white text-sm font-medium group-hover:text-red-400">Çıkış Yap</span>

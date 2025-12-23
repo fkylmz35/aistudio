@@ -29,9 +29,9 @@ function PendingCard({ pendingImage }: { pendingImage: PendingImage }) {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 border border-white/[0.05]"
+      className="relative aspect-square rounded-lg overflow-hidden bg-[#0c0c0c]/95 border border-white/[0.08]"
     >
-      {/* Blur/Gradient Background */}
+      {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 animate-pulse" />
 
       {/* Loading Spinner */}
@@ -52,10 +52,10 @@ function PendingCard({ pendingImage }: { pendingImage: PendingImage }) {
 
       {/* Quality/Ratio Badge */}
       <div className="absolute top-3 right-3 flex gap-1.5">
-        <span className="px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-[10px] text-white/60">
+        <span className="px-2 py-1 rounded bg-black/70 text-[10px] text-white/60">
           {pendingImage.resolution}
         </span>
-        <span className="px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-[10px] text-white/60">
+        <span className="px-2 py-1 rounded bg-black/70 text-[10px] text-white/60">
           {pendingImage.aspect_ratio}
         </span>
       </div>
@@ -255,7 +255,7 @@ export default function GalleryPage() {
                         duration: isNew ? 0.5 : 0.3,
                         ease: "easeOut"
                       }}
-                      className="group relative aspect-square rounded-2xl overflow-hidden bg-white/[0.02] border border-white/[0.05]"
+                      className="group relative aspect-square rounded-lg overflow-hidden bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm transition-all duration-150 ease-out hover:border-white/[0.15]"
                     >
                       {/* New image highlight */}
                       {isNew && (
@@ -303,10 +303,10 @@ export default function GalleryPage() {
 
                       {/* Quality/Ratio Badge */}
                       <div className="absolute top-3 right-3 flex gap-1.5">
-                        <span className="px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-[10px] text-white">
+                        <span className="px-2 py-1 rounded bg-black/70 text-[10px] text-white/80">
                           {image.resolution}
                         </span>
-                        <span className="px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-[10px] text-white">
+                        <span className="px-2 py-1 rounded bg-black/70 text-[10px] text-white/80">
                           {image.aspect_ratio}
                         </span>
                       </div>
@@ -339,9 +339,9 @@ export default function GalleryPage() {
               <img
                 src={selectedImage.image_url || "/placeholder.svg"}
                 alt={selectedImage.prompt}
-                className="max-w-full max-h-[80vh] object-contain rounded-2xl"
+                className="max-w-full max-h-[80vh] object-contain rounded-xl"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl">
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
                 <p className="text-white text-sm">{selectedImage.prompt}</p>
                 <div className="flex items-center gap-4 mt-2 text-xs text-zinc-400">
                   <span>Kalite: {selectedImage.resolution}</span>
@@ -361,14 +361,14 @@ export default function GalleryPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={() => !isDeleting && setImageToDelete(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6 max-w-sm w-full"
+              className="bg-[#0c0c0c]/95 border border-white/[0.08] rounded-xl p-6 max-w-sm w-full shadow-sm"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-500/10 mx-auto mb-4">
@@ -384,14 +384,14 @@ export default function GalleryPage() {
                 <button
                   onClick={() => setImageToDelete(null)}
                   disabled={isDeleting}
-                  className="flex-1 py-2.5 rounded-xl bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-colors disabled:opacity-50"
+                  className="flex-1 py-2.5 rounded-lg bg-white/10 text-white text-sm font-medium hover:bg-white/20 transition-all duration-150 disabled:opacity-50"
                 >
                   İptal
                 </button>
                 <button
                   onClick={confirmDelete}
                   disabled={isDeleting}
-                  className="flex-1 py-2.5 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 py-2.5 rounded-lg bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-all duration-150 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isDeleting ? (
                     <>
