@@ -32,7 +32,7 @@ export default function YasalPage() {
                   className="object-cover w-full h-full"
                 />
               </div>
-              <span className="font-semibold text-white">Nairoo AI</span>
+              <span className="font-semibold text-white">Nairoo AI Studio</span>
             </Link>
             <Link
               href="/"

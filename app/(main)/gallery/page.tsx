@@ -188,7 +188,7 @@ export default function GalleryPage() {
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement("a")
       a.href = url
-      a.download = `mira-ai-${image.id}.png`
+      a.download = `nairoo_${image.id}.png`
       document.body.appendChild(a)
       a.click()
       window.URL.revokeObjectURL(url)

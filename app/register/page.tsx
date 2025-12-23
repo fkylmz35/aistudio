@@ -134,16 +134,16 @@ export default function RegisterPage() {
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden">
-              <Image src="/logo.png" alt="Nairoo AI" width={40} height={40} className="object-contain" />
+              <Image src="/logo.png" alt="Nairoo AI Studio" width={40} height={40} className="object-contain" />
             </div>
-            <span className="text-2xl font-semibold text-white">Nairoo AI</span>
+            <span className="text-2xl font-semibold text-white">Nairoo AI Studio</span>
           </Link>
         </div>
 
         {/* Card */}
         <div className="bg-[#141414] border border-white/10 rounded-2xl p-8">
           <h1 className="text-2xl font-semibold text-white text-center mb-2">Hesap Oluştur</h1>
-          <p className="text-zinc-400 text-center mb-8">Nairoo AI ile görsel oluşturmaya başlayın</p>
+          <p className="text-zinc-400 text-center mb-8">Nairoo AI Studio ile görsel oluşturmaya başlayın</p>
 
           {error && (
             <motion.div

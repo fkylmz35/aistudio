@@ -238,7 +238,7 @@ export default function CreateImagePage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-6"
             >
-              <h2 className="text-xl text-white mb-1.5 md:text-4xl font-normal">Nairoo AI neler yapabilir?</h2>
+              <h2 className="text-xl text-white mb-1.5 md:text-4xl font-normal">Nairoo AI Studio neler yapabilir?</h2>
               <p className="text-zinc-500 text-xs max-w-sm mx-auto">
                 Yaratıcılığınızı sınırsız kılacak güçlü özellikler
               </p>

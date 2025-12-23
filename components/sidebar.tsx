@@ -51,7 +51,7 @@ export function Sidebar() {
                 transition={{ duration: 0.15, delay: 0.05 }}
                 className="font-semibold text-lg text-foreground whitespace-nowrap"
               >
-                Nairoo AI
+                Nairoo AI Studio
               </motion.span>
             )}
           </AnimatePresence>
