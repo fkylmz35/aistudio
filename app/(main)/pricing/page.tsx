@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { Header } from "@/components/header"
 import { Check, Sparkles, Crown, Loader2, ImageIcon, Zap } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
@@ -113,7 +112,6 @@ export default function PricingPage() {
   }
 
   const handlePurchase = (pkg: CreditPackage) => {
-    // TODO: Implement payment integration (Iyzico, Stripe, etc.)
     alert(`${pkg.name} paketi satın alma işlemi yakında aktif olacak!`)
   }
 
@@ -289,22 +287,6 @@ export default function PricingPage() {
                 Kullanılmayan kredilerin %50&apos;si bir sonraki aya devredilir
               </span>
             </div>
-          </motion.div>
-
-          {/* Payment methods */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mb-12 flex justify-center"
-          >
-            <Image
-              src="/payment-methods.png"
-              alt="Ödeme Yöntemleri - iyzico, Mastercard, Visa, American Express, Troy"
-              width={450}
-              height={50}
-              className="opacity-70 hover:opacity-100 transition-opacity"
-            />
           </motion.div>
 
           {/* Feature Comparison */}

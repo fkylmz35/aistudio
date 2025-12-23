@@ -529,21 +529,6 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          {/* Payment methods */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-8 flex justify-center"
-          >
-            <Image
-              src="/payment-methods.png"
-              alt="Ödeme Yöntemleri - iyzico, Mastercard, Visa, American Express, Troy"
-              width={500}
-              height={60}
-              className="opacity-70 hover:opacity-100 transition-opacity"
-            />
-          </motion.div>
         </div>
       </section>
 

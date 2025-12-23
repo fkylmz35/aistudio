@@ -134,7 +134,7 @@ export default function YasalPage() {
 
                 <div>
                   <h3 className="text-white font-medium mb-2">Veri Aktarımı</h3>
-                  <p className="text-zinc-400">Supabase, FAL AI, Google, Vercel, iyzico</p>
+                  <p className="text-zinc-400">Supabase, FAL AI, Google, Vercel</p>
                 </div>
 
                 <div>
@@ -303,7 +303,6 @@ export default function YasalPage() {
                   <p><strong className="text-white">Ürün:</strong> Dijital kredi / abonelik</p>
                   <p><strong className="text-white">Teslim:</strong> Anında</p>
                   <p><strong className="text-white">İade:</strong> Yoktur</p>
-                  <p><strong className="text-white">Ödeme:</strong> iyzico</p>
                   <p><strong className="text-white">KDV:</strong> Dahildir</p>
                 </div>
 

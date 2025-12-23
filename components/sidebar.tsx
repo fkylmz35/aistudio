@@ -7,23 +7,19 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Compass, ImageIcon, Video, Sparkles, Film, Search, Command, LayoutGrid, Coins } from "lucide-react"
+import { Compass, Heart, LayoutGrid, Coins, User, Search, Command } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const mainNav = [
   { href: "/explore", label: "Keşfet", icon: Compass },
-  { href: "/create/image", label: "Görsel Oluştur", icon: ImageIcon },
-  { href: "/create/video", label: "Video Oluştur", icon: Video },
+  { href: "/favorites", label: "Favoriler", icon: Heart },
+  { href: "/gallery", label: "Galeri", icon: LayoutGrid },
 ]
 
-const agentsNav = [
-  { href: "/agents/ugc-image", label: "UGC Görsel", icon: Sparkles },
-  { href: "/agents/ugc-video", label: "UGC Video", icon: Film },
+const accountNav = [
+  { href: "/pricing", label: "Kredi Satın Al", icon: Coins },
+  { href: "/profile", label: "Profil", icon: User },
 ]
-
-const libraryNav = [{ href: "/gallery", label: "Galeri", icon: LayoutGrid }]
-
-const accountNav = [{ href: "/pricing", label: "Kredi Satın Al", icon: Coins }]
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -97,56 +93,6 @@ export function Sidebar() {
           />
         ))}
 
-        {/* Agents Section */}
-        <div className="pt-4 pb-2">
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="px-3 text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              >
-                Agents
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
-        {agentsNav.map((item, index) => (
-          <NavItem
-            key={item.href}
-            {...item}
-            isExpanded={isExpanded}
-            isActive={pathname === item.href}
-            delay={(mainNav.length + index) * 0.03}
-          />
-        ))}
-
-        {/* Library Section */}
-        <div className="pt-4 pb-2">
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="px-3 text-xs font-medium text-muted-foreground uppercase tracking-wider"
-              >
-                Kütüphane
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </div>
-        {libraryNav.map((item, index) => (
-          <NavItem
-            key={item.href}
-            {...item}
-            isExpanded={isExpanded}
-            isActive={pathname === item.href}
-            delay={(mainNav.length + agentsNav.length + index) * 0.03}
-          />
-        ))}
-
         {/* Account Section */}
         <div className="pt-4 pb-2">
           <AnimatePresence>
@@ -168,7 +114,7 @@ export function Sidebar() {
             {...item}
             isExpanded={isExpanded}
             isActive={pathname === item.href}
-            delay={(mainNav.length + agentsNav.length + libraryNav.length + index) * 0.03}
+            delay={(mainNav.length + index) * 0.03}
           />
         ))}
       </nav>

@@ -3,14 +3,15 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
-import { Compass, ImageIcon, Video, Sparkles } from "lucide-react"
+import { Compass, Heart, LayoutGrid, Coins, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { href: "/explore", label: "Keşfet", icon: Compass },
-  { href: "/create/image", label: "Görsel", icon: ImageIcon },
-  { href: "/create/video", label: "Video", icon: Video },
-  { href: "/agents/ugc-image", label: "UGC", icon: Sparkles },
+  { href: "/favorites", label: "Favoriler", icon: Heart },
+  { href: "/gallery", label: "Galeri", icon: LayoutGrid },
+  { href: "/pricing", label: "Kredi", icon: Coins },
+  { href: "/profile", label: "Profil", icon: User },
 ]
 
 export function MobileNav() {
