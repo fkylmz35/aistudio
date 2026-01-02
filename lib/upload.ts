@@ -6,8 +6,8 @@ export interface UploadResult {
   error?: string
 }
 
-// İzin verilen MIME tipleri
-const ALLOWED_MIME_TYPES = [
+// İzin verilen MIME tipleri (görsel)
+const ALLOWED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/png",
   "image/gif",
@@ -15,8 +15,24 @@ const ALLOWED_MIME_TYPES = [
   "image/svg+xml",
 ]
 
-// İzin verilen dosya uzantıları
-const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "svg"]
+// İzin verilen MIME tipleri (video)
+const ALLOWED_VIDEO_MIME_TYPES = [
+  "video/mp4",
+  "video/webm",
+  "video/quicktime",
+]
+
+// Tüm izin verilen MIME tipleri
+const ALLOWED_MIME_TYPES = [...ALLOWED_IMAGE_MIME_TYPES, ...ALLOWED_VIDEO_MIME_TYPES]
+
+// İzin verilen dosya uzantıları (görsel)
+const ALLOWED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "svg"]
+
+// İzin verilen dosya uzantıları (video)
+const ALLOWED_VIDEO_EXTENSIONS = ["mp4", "webm", "mov"]
+
+// Tüm izin verilen uzantılar
+const ALLOWED_EXTENSIONS = [...ALLOWED_IMAGE_EXTENSIONS, ...ALLOWED_VIDEO_EXTENSIONS]
 
 /**
  * Dosya tipini doğrular
@@ -50,7 +66,7 @@ export async function uploadToStorage(file: File, userId: string): Promise<Uploa
     if (!validateFileType(file)) {
       return {
         success: false,
-        error: "Geçersiz dosya tipi. Sadece görsel dosyaları (jpg, png, gif, webp, svg) yüklenebilir.",
+        error: "Geçersiz dosya tipi. Sadece görsel (jpg, png, gif, webp, svg) ve video (mp4, webm, mov) dosyaları yüklenebilir.",
       }
     }
 
