@@ -11,7 +11,7 @@ import { Compass, Heart, LayoutGrid, Coins, User, Search, Command } from "lucide
 import { cn } from "@/lib/utils"
 
 const mainNav = [
-  { href: "/explore", label: "Keşfet", icon: Compass },
+  { href: "/explore", label: "Marketplace", icon: Compass },
   { href: "/favorites", label: "Favoriler", icon: Heart },
   { href: "/gallery", label: "Galeri", icon: LayoutGrid },
 ]

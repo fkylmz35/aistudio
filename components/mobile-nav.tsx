@@ -7,7 +7,7 @@ import { Compass, Heart, LayoutGrid, Coins, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { href: "/explore", label: "Keşfet", icon: Compass },
+  { href: "/explore", label: "Marketplace", icon: Compass },
   { href: "/favorites", label: "Favoriler", icon: Heart },
   { href: "/gallery", label: "Galeri", icon: LayoutGrid },
   { href: "/pricing", label: "Kredi", icon: Coins },

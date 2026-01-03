@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Header } from "@/components/header"
-import { Check, Sparkles, Crown, Loader2, ImageIcon, Zap } from "lucide-react"
+import { Check, Sparkles, Crown, Loader2, ImageIcon, Zap, ArrowRight } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCredits } from "@/contexts/credits-context"
 import { supabase } from "@/lib/supabase-browser"
@@ -88,7 +88,6 @@ export default function PricingPage() {
 
         if (error) {
           console.error("[Pricing] Error fetching packages:", error)
-          // Use fallback packages
         } else if (data && data.length > 0) {
           setPackages(data)
         }
@@ -129,252 +128,271 @@ export default function PricingPage() {
   return (
     <>
       <Header title="Kredi Satın Al" />
-      <div className="p-6 overflow-y-auto">
-        <div className="max-w-5xl mx-auto">
-          {/* Hero Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
-          >
-            <h1 className="text-3xl font-bold text-white mb-3">
-              Kredi Paketleri
-            </h1>
-            <p className="text-zinc-400 max-w-lg mx-auto">
-              İhtiyacınıza uygun paketi seçin ve yapay zeka ile sınırsız görsel üretin.
-            </p>
-          </motion.div>
 
-          {/* Packages Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {packages.map((pkg, index) => {
-              const originalPrice = getOriginalPrice(pkg)
-              const isCurrentPlan = pkg.price_tl === 0 && !isPro
-              const isFree = pkg.price_tl === 0
+      {/* Main content with noise texture background */}
+      <div className="relative min-h-[calc(100vh-64px)] overflow-hidden">
+        {/* Background with noise texture */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-900"
+          style={{
+            backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
 
-              return (
-                <motion.div
-                  key={pkg.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`relative p-6 rounded-lg border shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 ${
-                    pkg.is_popular
-                      ? "bg-[#0c0c0c]/95 border-amber-500/30 hover:border-amber-500/50"
-                      : "bg-[#0c0c0c]/95 border-white/[0.08] hover:border-white/[0.15]"
-                  }`}
-                >
-                  {/* Popular Badge */}
-                  {pkg.is_popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-xs font-semibold flex items-center gap-1">
-                        <Crown className="w-3 h-3" />
-                        En Popüler
-                      </span>
-                    </div>
-                  )}
+        {/* Blur orbs for ambient effect */}
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]" />
+        <div className="absolute top-60 right-1/4 w-80 h-80 bg-yellow-500/10 rounded-full blur-[100px]" />
 
-                  {/* Current Plan Badge */}
-                  {isCurrentPlan && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <span className="px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 text-green-400 text-xs font-semibold">
-                        Mevcut Paket
-                      </span>
-                    </div>
-                  )}
+        {/* Content */}
+        <div className="relative z-10 p-6 overflow-y-auto">
+          <div className="max-w-5xl mx-auto">
+            {/* Hero Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-12"
+            >
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                İhtiyacınıza Uygun <span className="bg-gradient-to-r from-amber-300 to-yellow-400 bg-clip-text text-transparent">Paketi</span> Seçin
+              </h1>
+              <p className="text-zinc-400 max-w-lg mx-auto">
+                Yapay zeka ile sınırsız görsel üretin. Her paket ile farklı kalite seçeneklerine erişin.
+              </p>
+            </motion.div>
 
-                  {/* Package Name */}
-                  <h3 className={`text-lg font-semibold mb-2 ${pkg.is_popular ? "text-amber-400" : "text-white"}`}>
-                    {pkg.name}
-                  </h3>
+            {/* Packages Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+              {packages.map((pkg, index) => {
+                const originalPrice = getOriginalPrice(pkg)
+                const isCurrentPlan = pkg.price_tl === 0 && !isPro
+                const isFree = pkg.price_tl === 0
 
-                  {/* Credits */}
-                  <div className="flex items-baseline gap-1 mb-4">
-                    <span className={`text-4xl font-bold ${pkg.is_popular ? "text-amber-400" : "text-white"}`}>
-                      {pkg.credits.toLocaleString("tr-TR")}
-                    </span>
-                    <span className="text-zinc-500 text-sm">kredi</span>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mb-6">
-                    {isFree ? (
-                      <span className="text-2xl font-bold text-green-400">Ücretsiz</span>
-                    ) : (
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-2xl font-bold text-white">{pkg.price_tl} ₺</span>
-                        {originalPrice && (
-                          <span className="text-sm text-zinc-500 line-through">{originalPrice} ₺</span>
-                        )}
+                return (
+                  <motion.div
+                    key={pkg.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`relative p-6 rounded-2xl border backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 ${
+                      pkg.is_popular
+                        ? "bg-gradient-to-b from-amber-500/10 to-transparent border-amber-500/30 hover:border-amber-500/50 shadow-lg shadow-amber-500/10"
+                        : "bg-zinc-900/50 border-white/[0.08] hover:border-white/[0.15]"
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {pkg.is_popular && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-black text-xs font-semibold flex items-center gap-1 shadow-lg">
+                          <Crown className="w-3 h-3" />
+                          En Popüler
+                        </span>
                       </div>
                     )}
-                    {pkg.discount_percent > 0 && (
-                      <span className="text-xs text-green-400">%{pkg.discount_percent} indirim</span>
-                    )}
-                  </div>
 
-                  {/* Image Calculations */}
-                  <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.08] mb-6">
-                    <p className="text-xs text-zinc-500 mb-2 flex items-center gap-1">
-                      <ImageIcon className="w-3 h-3" />
-                      Üretebileceğin görsel sayısı:
-                    </p>
-                    <div className="space-y-1 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-zinc-400">Standart</span>
-                        <span className="text-white font-medium">{calculateImages(pkg.credits, "standart")} görsel</span>
+                    {/* Current Plan Badge */}
+                    {isCurrentPlan && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="px-4 py-1.5 rounded-full bg-green-500/20 border border-green-500/30 text-green-400 text-xs font-semibold">
+                          Mevcut Paket
+                        </span>
                       </div>
-                      {!isFree && (
-                        <>
-                          <div className="flex justify-between">
-                            <span className="text-zinc-400">1K / 2K</span>
-                            <span className="text-white font-medium">{calculateImages(pkg.credits, "1k")} görsel</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-zinc-400">4K</span>
-                            <span className="text-white font-medium">{calculateImages(pkg.credits, "4k")} görsel</span>
-                          </div>
-                        </>
+                    )}
+
+                    {/* Package Name */}
+                    <h3 className={`text-lg font-semibold mb-2 ${pkg.is_popular ? "text-amber-400" : "text-white"}`}>
+                      {pkg.name}
+                    </h3>
+
+                    {/* Credits */}
+                    <div className="flex items-baseline gap-1 mb-4">
+                      <span className={`text-4xl font-bold ${pkg.is_popular ? "text-amber-400" : "text-white"}`}>
+                        {pkg.credits.toLocaleString("tr-TR")}
+                      </span>
+                      <span className="text-zinc-500 text-sm">kredi</span>
+                    </div>
+
+                    {/* Price */}
+                    <div className="mb-6">
+                      {isFree ? (
+                        <span className="text-2xl font-bold text-green-400">Ücretsiz</span>
+                      ) : (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-2xl font-bold text-white">{pkg.price_tl} ₺</span>
+                          {originalPrice && (
+                            <span className="text-sm text-zinc-500 line-through">{originalPrice} ₺</span>
+                          )}
+                        </div>
+                      )}
+                      {pkg.discount_percent > 0 && (
+                        <span className="text-xs text-green-400 font-medium">%{pkg.discount_percent} indirim</span>
                       )}
                     </div>
-                  </div>
 
-                  {/* Features */}
-                  <ul className="space-y-2 mb-6">
-                    {(pkg.features || []).map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
-                        <Check className={`w-4 h-4 ${pkg.is_popular ? "text-amber-400" : "text-green-400"}`} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                    {/* Image Calculations */}
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6">
+                      <p className="text-xs text-zinc-500 mb-2 flex items-center gap-1">
+                        <ImageIcon className="w-3 h-3" />
+                        Üretebileceğin görsel sayısı:
+                      </p>
+                      <div className="space-y-1 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-zinc-400">Standart</span>
+                          <span className="text-white font-medium">{calculateImages(pkg.credits, "standart")} görsel</span>
+                        </div>
+                        {!isFree && (
+                          <>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-400">1K / 2K</span>
+                              <span className="text-white font-medium">{calculateImages(pkg.credits, "1k")} görsel</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-zinc-400">4K</span>
+                              <span className="text-white font-medium">{calculateImages(pkg.credits, "4k")} görsel</span>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
 
-                  {/* Purchase Button */}
-                  {isFree ? (
-                    <button
-                      disabled
-                      className="w-full py-3 rounded-lg bg-white/[0.05] text-zinc-500 text-sm font-medium cursor-not-allowed"
-                    >
-                      {isCurrentPlan ? "Mevcut Paketiniz" : "Kayıt Ol"}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handlePurchase(pkg)}
-                      className={`w-full py-3 rounded-lg text-sm font-medium transition-all duration-150 ${
-                        pkg.is_popular
-                          ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-black hover:from-amber-400 hover:to-yellow-400"
-                          : "bg-white text-black hover:bg-zinc-200"
-                      }`}
-                    >
-                      Satın Al
-                    </button>
-                  )}
-                </motion.div>
-              )
-            })}
+                    {/* Features */}
+                    <ul className="space-y-2 mb-6">
+                      {(pkg.features || []).map((feature, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm text-zinc-400">
+                          <Check className={`w-4 h-4 shrink-0 ${pkg.is_popular ? "text-amber-400" : "text-green-400"}`} />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Purchase Button */}
+                    {isFree ? (
+                      <button
+                        disabled
+                        className="w-full py-3 rounded-xl bg-zinc-800 text-zinc-500 text-sm font-medium cursor-not-allowed"
+                      >
+                        {isCurrentPlan ? "Mevcut Paketiniz" : "Kayıt Ol"}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handlePurchase(pkg)}
+                        className={`w-full py-3 rounded-xl text-sm font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+                          pkg.is_popular
+                            ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-black hover:from-amber-400 hover:to-yellow-400 shadow-lg shadow-amber-500/20"
+                            : "bg-white text-black hover:bg-zinc-200"
+                        }`}
+                      >
+                        Satın Al
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    )}
+                  </motion.div>
+                )
+              })}
+            </div>
+
+            {/* Credit carry-over info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mb-8 text-center"
+            >
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-green-500/10 border border-green-500/20">
+                <Zap className="w-4 h-4 text-green-400" />
+                <span className="text-sm text-green-400">
+                  Kullanılmayan kredilerin %50&apos;si bir sonraki aya devredilir
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Feature Comparison */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="p-6 rounded-2xl bg-zinc-900/50 border border-white/[0.08] backdrop-blur-sm"
+            >
+              <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-amber-400" />
+                Özellik Karşılaştırması
+              </h2>
+
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-white/[0.05]">
+                      <th className="text-left py-3 text-sm font-medium text-zinc-400">Özellik</th>
+                      <th className="text-center py-3 text-sm font-medium text-zinc-400">Deneme</th>
+                      <th className="text-center py-3 text-sm font-medium text-zinc-400">Başlangıç</th>
+                      <th className="text-center py-3 text-sm font-medium text-zinc-400">Standart</th>
+                      <th className="text-center py-3 text-sm font-medium text-amber-400">Pro</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm">
+                    <tr className="border-b border-white/[0.03]">
+                      <td className="py-3 text-zinc-300">Standart Kalite</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                    <tr className="border-b border-white/[0.03]">
+                      <td className="py-3 text-zinc-300">1K / 2K Kalite</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                    <tr className="border-b border-white/[0.03]">
+                      <td className="py-3 text-zinc-300">4K Kalite</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                    <tr className="border-b border-white/[0.03]">
+                      <td className="py-3 text-zinc-300">Öncelikli Destek</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                    <tr className="border-b border-white/[0.03]">
+                      <td className="py-3 text-zinc-300">VIP Destek</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 text-zinc-300">Erken Erişim</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3 text-zinc-600">—</td>
+                      <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+
+            {/* Credit Costs Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-6 p-4 rounded-xl bg-zinc-900/50 border border-white/[0.08]"
+            >
+              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>
+                  <strong className="text-zinc-400">Kredi kullanımı:</strong> Standart kalite {creditCosts.standart} kredi,
+                  1K/2K kalite {creditCosts["1k"]} kredi, 4K kalite {creditCosts["4k"]} kredi harcar.
+                </span>
+              </p>
+            </motion.div>
           </div>
-
-          {/* Credit carry-over info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-6 text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20">
-              <Zap className="w-4 h-4 text-green-400" />
-              <span className="text-sm text-green-400">
-                Kullanılmayan kredilerin %50&apos;si bir sonraki aya devredilir
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Feature Comparison */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="p-6 rounded-lg bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm"
-          >
-            <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-amber-400" />
-              Özellik Karşılaştırması
-            </h2>
-
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/[0.05]">
-                    <th className="text-left py-3 text-sm font-medium text-zinc-400">Özellik</th>
-                    <th className="text-center py-3 text-sm font-medium text-zinc-400">Deneme</th>
-                    <th className="text-center py-3 text-sm font-medium text-zinc-400">Başlangıç</th>
-                    <th className="text-center py-3 text-sm font-medium text-zinc-400">Standart</th>
-                    <th className="text-center py-3 text-sm font-medium text-amber-400">Pro</th>
-                  </tr>
-                </thead>
-                <tbody className="text-sm">
-                  <tr className="border-b border-white/[0.03]">
-                    <td className="py-3 text-zinc-300">Standart Kalite</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                  <tr className="border-b border-white/[0.03]">
-                    <td className="py-3 text-zinc-300">1K / 2K Kalite</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                  <tr className="border-b border-white/[0.03]">
-                    <td className="py-3 text-zinc-300">4K Kalite</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                  <tr className="border-b border-white/[0.03]">
-                    <td className="py-3 text-zinc-300">Öncelikli Destek</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-green-400 mx-auto" /></td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                  <tr className="border-b border-white/[0.03]">
-                    <td className="py-3 text-zinc-300">VIP Destek</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 text-zinc-300">Erken Erişim</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3 text-zinc-600">—</td>
-                    <td className="text-center py-3"><Check className="w-4 h-4 text-amber-400 mx-auto" /></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </motion.div>
-
-          {/* Credit Costs Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 p-4 rounded-lg bg-[#0c0c0c]/95 border border-white/[0.08] shadow-sm"
-          >
-            <p className="text-sm text-zinc-500 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>
-                <strong className="text-zinc-400">Kredi kullanımı:</strong> Standart kalite {creditCosts.standart} kredi,
-                1K/2K kalite {creditCosts["1k"]} kredi, 4K kalite {creditCosts["4k"]} kredi harcar.
-              </span>
-            </p>
-          </motion.div>
         </div>
       </div>
     </>

@@ -15,7 +15,8 @@ import {
   AlertTriangle,
   Eye,
   EyeOff,
-  ChevronLeft
+  ChevronLeft,
+  Settings as SettingsIcon
 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { supabase } from "@/lib/supabase-browser"
@@ -212,271 +213,288 @@ export default function SettingsPage() {
   return (
     <>
       <Header title="Hesap Ayarları" />
-      <div className="p-6 overflow-y-auto">
-        <div className="max-w-2xl mx-auto">
-          {/* Back to Profile */}
-          <Link
-            href="/profile"
-            className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-white mb-6 transition-colors"
-          >
-            <ChevronLeft className="w-4 h-4" />
-            Profile Dön
-          </Link>
+      <div className="relative min-h-[calc(100vh-64px)] overflow-hidden">
+        {/* Background with noise texture */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-900"
+          style={{
+            backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
 
-          {/* Profile Information */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
-                <User className="w-5 h-5 text-zinc-400" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white">Profil Bilgileri</h2>
-                <p className="text-sm text-zinc-500">Ad soyad bilgilerinizi güncelleyin</p>
-              </div>
-            </div>
+        {/* Blur orbs for ambient effect */}
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-40 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px]" />
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Ad Soyad</label>
-                <input
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Ad Soyad"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
-                />
-              </div>
+        {/* Content */}
+        <div className="relative z-10 p-6 overflow-y-auto">
+          <div className="max-w-2xl mx-auto">
+            {/* Back to Profile */}
+            <Link
+              href="/profile"
+              className="inline-flex items-center gap-1 text-sm text-zinc-400 hover:text-white mb-6 transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              Profile Dön
+            </Link>
 
-              <button
-                onClick={handleUpdateProfile}
-                disabled={isUpdatingProfile}
-                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                {isUpdatingProfile ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Check className="w-4 h-4" />
-                )}
-                Kaydet
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Email Change */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
-                <Mail className="w-5 h-5 text-zinc-400" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white">E-posta Adresi</h2>
-                <p className="text-sm text-zinc-500">E-posta adresinizi değiştirin</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Mevcut E-posta</label>
-                <div className="px-4 py-3 bg-white/[0.02] border border-white/[0.05] rounded-lg text-zinc-500">
-                  {user?.email}
+            {/* Profile Information */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05 }}
+              className="p-6 bg-zinc-900/50 border border-white/[0.08] rounded-2xl backdrop-blur-sm mb-6"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/[0.05] flex items-center justify-center">
+                  <User className="w-6 h-6 text-zinc-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-white">Profil Bilgileri</h2>
+                  <p className="text-sm text-zinc-500">Ad soyad bilgilerinizi güncelleyin</p>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Yeni E-posta</label>
-                <input
-                  type="email"
-                  value={newEmail}
-                  onChange={(e) => setNewEmail(e.target.value)}
-                  placeholder="yeni@email.com"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
-                />
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">Ad Soyad</label>
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="Ad Soyad"
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
+                  />
+                </div>
+
+                <button
+                  onClick={handleUpdateProfile}
+                  disabled={isUpdatingProfile}
+                  className="px-6 py-3 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isUpdatingProfile ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Check className="w-4 h-4" />
+                  )}
+                  Kaydet
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Email Change */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="p-6 bg-zinc-900/50 border border-white/[0.08] rounded-2xl backdrop-blur-sm mb-6"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/[0.05] flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-zinc-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-white">E-posta Adresi</h2>
+                  <p className="text-sm text-zinc-500">E-posta adresinizi değiştirin</p>
+                </div>
               </div>
 
-              <p className="text-xs text-zinc-500">
-                E-posta değişikliği için yeni adresinize doğrulama maili gönderilecektir.
-              </p>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">Mevcut E-posta</label>
+                  <div className="px-4 py-3 bg-white/[0.02] border border-white/[0.05] rounded-xl text-zinc-500">
+                    {user?.email}
+                  </div>
+                </div>
 
-              <button
-                onClick={handleUpdateEmail}
-                disabled={isUpdatingEmail || !newEmail}
-                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                {isUpdatingEmail ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Mail className="w-4 h-4" />
-                )}
-                E-posta Değiştir
-              </button>
-            </div>
-          </motion.div>
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">Yeni E-posta</label>
+                  <input
+                    type="email"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    placeholder="yeni@email.com"
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
+                  />
+                </div>
 
-          {/* Password Change */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
-                <Lock className="w-5 h-5 text-zinc-400" />
+                <p className="text-xs text-zinc-500">
+                  E-posta değişikliği için yeni adresinize doğrulama maili gönderilecektir.
+                </p>
+
+                <button
+                  onClick={handleUpdateEmail}
+                  disabled={isUpdatingEmail || !newEmail}
+                  className="px-6 py-3 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isUpdatingEmail ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Mail className="w-4 h-4" />
+                  )}
+                  E-posta Değiştir
+                </button>
               </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white">Şifre Değiştir</h2>
-                <p className="text-sm text-zinc-500">Hesap şifrenizi güncelleyin</p>
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Yeni Şifre</label>
-                <div className="relative">
+            {/* Password Change */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="p-6 bg-zinc-900/50 border border-white/[0.08] rounded-2xl backdrop-blur-sm mb-6"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/[0.05] flex items-center justify-center">
+                  <Lock className="w-6 h-6 text-zinc-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-white">Şifre Değiştir</h2>
+                  <p className="text-sm text-zinc-500">Hesap şifrenizi güncelleyin</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">Yeni Şifre</label>
+                  <div className="relative">
+                    <input
+                      type={showPasswords ? "text" : "password"}
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150 pr-12"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPasswords(!showPasswords)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors"
+                    >
+                      {showPasswords ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    </button>
+                  </div>
+
+                  {/* Password requirements */}
+                  {newPassword && (
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      {Object.entries(passwordRequirements).map(([key, req]) => (
+                        <div key={key} className="flex items-center gap-2 p-2 rounded-lg bg-white/[0.02]">
+                          <div className={`w-2 h-2 rounded-full ${req.test(newPassword) ? "bg-green-500" : "bg-zinc-600"}`} />
+                          <span className={`text-xs ${req.test(newPassword) ? "text-green-500" : "text-zinc-500"}`}>
+                            {req.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-2">Şifre Tekrar</label>
                   <input
                     type={showPasswords ? "text" : "password"}
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150 pr-12"
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
                   />
+                  {confirmPassword && newPassword !== confirmPassword && (
+                    <p className="mt-2 text-xs text-red-400">Şifreler eşleşmiyor</p>
+                  )}
+                </div>
+
+                <button
+                  onClick={handleUpdatePassword}
+                  disabled={isUpdatingPassword || !newPassword || !confirmPassword}
+                  className="px-6 py-3 bg-white text-black rounded-xl text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isUpdatingPassword ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Lock className="w-4 h-4" />
+                  )}
+                  Şifre Değiştir
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Notification Settings */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="p-6 bg-zinc-900/50 border border-white/[0.08] rounded-2xl backdrop-blur-sm mb-6"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/[0.05] flex items-center justify-center">
+                  <Bell className="w-6 h-6 text-zinc-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-white">Bildirim Ayarları</h2>
+                  <p className="text-sm text-zinc-500">E-posta bildirimlerinizi yönetin</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05]">
+                  <div>
+                    <p className="text-sm font-medium text-white">E-posta Bildirimleri</p>
+                    <p className="text-xs text-zinc-500">Görsel oluşturma tamamlandığında bildirim al</p>
+                  </div>
                   <button
-                    type="button"
-                    onClick={() => setShowPasswords(!showPasswords)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors"
+                    onClick={() => setEmailNotifications(!emailNotifications)}
+                    className={`w-12 h-6 rounded-full transition-all duration-150 ${emailNotifications ? "bg-green-500" : "bg-zinc-700"}`}
                   >
-                    {showPasswords ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    <div className={`w-5 h-5 bg-white rounded-full transition-transform ${emailNotifications ? "translate-x-6" : "translate-x-0.5"}`} />
                   </button>
                 </div>
 
-                {/* Password requirements */}
-                {newPassword && (
-                  <div className="mt-2 grid grid-cols-2 gap-1">
-                    {Object.entries(passwordRequirements).map(([key, req]) => (
-                      <div key={key} className="flex items-center gap-1.5">
-                        <div className={`w-1.5 h-1.5 rounded-full ${req.test(newPassword) ? "bg-green-500" : "bg-zinc-600"}`} />
-                        <span className={`text-xs ${req.test(newPassword) ? "text-green-500" : "text-zinc-500"}`}>
-                          {req.label}
-                        </span>
-                      </div>
-                    ))}
+                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05]">
+                  <div>
+                    <p className="text-sm font-medium text-white">Pazarlama E-postaları</p>
+                    <p className="text-xs text-zinc-500">Yenilikler ve kampanyalar hakkında bilgi al</p>
                   </div>
-                )}
+                  <button
+                    onClick={() => setMarketingEmails(!marketingEmails)}
+                    className={`w-12 h-6 rounded-full transition-all duration-150 ${marketingEmails ? "bg-green-500" : "bg-zinc-700"}`}
+                  >
+                    <div className={`w-5 h-5 bg-white rounded-full transition-transform ${marketingEmails ? "translate-x-6" : "translate-x-0.5"}`} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Delete Account */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="p-6 bg-zinc-900/50 border border-red-500/20 rounded-2xl backdrop-blur-sm"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                  <Trash2 className="w-6 h-6 text-red-400" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-red-400">Hesabı Sil</h2>
+                  <p className="text-sm text-zinc-500">Bu işlem geri alınamaz</p>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Şifre Tekrar</label>
-                <input
-                  type={showPasswords ? "text" : "password"}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/[0.15] transition-all duration-150"
-                />
-                {confirmPassword && newPassword !== confirmPassword && (
-                  <p className="mt-1 text-xs text-red-400">Şifreler eşleşmiyor</p>
-                )}
-              </div>
+              <p className="text-sm text-zinc-400 mb-4">
+                Hesabınızı sildiğinizde tüm verileriniz, oluşturduğunuz görseller ve kredi bakiyeniz kalıcı olarak silinecektir.
+              </p>
 
               <button
-                onClick={handleUpdatePassword}
-                disabled={isUpdatingPassword || !newPassword || !confirmPassword}
-                className="px-6 py-2.5 bg-white text-black rounded-lg text-sm font-medium hover:bg-zinc-200 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                onClick={() => setShowDeleteModal(true)}
+                className="px-6 py-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium hover:bg-red-500/20 transition-all duration-150 flex items-center gap-2"
               >
-                {isUpdatingPassword ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Lock className="w-4 h-4" />
-                )}
-                Şifre Değiştir
+                <Trash2 className="w-4 h-4" />
+                Hesabı Sil
               </button>
-            </div>
-          </motion.div>
-
-          {/* Notification Settings */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-lg shadow-sm mb-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center">
-                <Bell className="w-5 h-5 text-zinc-400" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-white">Bildirim Ayarları</h2>
-                <p className="text-sm text-zinc-500">E-posta bildirimlerinizi yönetin</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-lg border border-white/[0.05]">
-                <div>
-                  <p className="text-sm font-medium text-white">E-posta Bildirimleri</p>
-                  <p className="text-xs text-zinc-500">Görsel oluşturma tamamlandığında bildirim al</p>
-                </div>
-                <button
-                  onClick={() => setEmailNotifications(!emailNotifications)}
-                  className={`w-12 h-6 rounded-full transition-all duration-150 ${emailNotifications ? "bg-green-500" : "bg-zinc-700"}`}
-                >
-                  <div className={`w-5 h-5 bg-white rounded-full transition-transform ${emailNotifications ? "translate-x-6" : "translate-x-0.5"}`} />
-                </button>
-              </div>
-
-              <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-lg border border-white/[0.05]">
-                <div>
-                  <p className="text-sm font-medium text-white">Pazarlama E-postaları</p>
-                  <p className="text-xs text-zinc-500">Yenilikler ve kampanyalar hakkında bilgi al</p>
-                </div>
-                <button
-                  onClick={() => setMarketingEmails(!marketingEmails)}
-                  className={`w-12 h-6 rounded-full transition-all duration-150 ${marketingEmails ? "bg-green-500" : "bg-zinc-700"}`}
-                >
-                  <div className={`w-5 h-5 bg-white rounded-full transition-transform ${marketingEmails ? "translate-x-6" : "translate-x-0.5"}`} />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Delete Account */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="p-6 bg-[#0c0c0c]/95 border border-red-500/[0.15] rounded-lg shadow-sm"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
-                <Trash2 className="w-5 h-5 text-red-400" />
-              </div>
-              <div>
-                <h2 className="text-lg font-semibold text-red-400">Hesabı Sil</h2>
-                <p className="text-sm text-zinc-500">Bu işlem geri alınamaz</p>
-              </div>
-            </div>
-
-            <p className="text-sm text-zinc-400 mb-4">
-              Hesabınızı sildiğinizde tüm verileriniz, oluşturduğunuz görseller ve kredi bakiyeniz kalıcı olarak silinecektir.
-            </p>
-
-            <button
-              onClick={() => setShowDeleteModal(true)}
-              className="px-6 py-2.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm font-medium hover:bg-red-500/20 transition-all duration-150 flex items-center gap-2"
-            >
-              <Trash2 className="w-4 h-4" />
-              Hesabı Sil
-            </button>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -487,19 +505,19 @@ export default function SettingsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
             onClick={() => setShowDeleteModal(false)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-md p-6 bg-[#0c0c0c]/95 border border-white/[0.08] rounded-xl shadow-sm"
+              className="w-full max-w-md p-6 bg-zinc-900/90 border border-white/[0.08] rounded-2xl backdrop-blur-xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center">
-                  <AlertTriangle className="w-6 h-6 text-red-400" />
+                <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                  <AlertTriangle className="w-7 h-7 text-red-400" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white">Hesabı Silmek İstediğinize Emin Misiniz?</h3>
@@ -507,7 +525,7 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-lg mb-4">
+              <div className="p-4 bg-red-500/5 border border-red-500/10 rounded-xl mb-4">
                 <p className="text-sm text-zinc-400">
                   Hesabınız silindiğinde:
                 </p>
@@ -527,21 +545,21 @@ export default function SettingsPage() {
                   value={deleteConfirmText}
                   onChange={(e) => setDeleteConfirmText(e.target.value)}
                   placeholder="HESABIMI SIL"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-lg text-white placeholder:text-zinc-600 focus:outline-none focus:border-red-500/30 transition-all duration-150"
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder:text-zinc-600 focus:outline-none focus:border-red-500/30 transition-all duration-150"
                 />
               </div>
 
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowDeleteModal(false)}
-                  className="flex-1 px-4 py-2.5 bg-white/10 text-white rounded-lg text-sm font-medium hover:bg-white/20 transition-all duration-150"
+                  className="flex-1 px-4 py-3 bg-white/10 text-white rounded-xl text-sm font-medium hover:bg-white/20 transition-all duration-150 border border-white/[0.05]"
                 >
                   İptal
                 </button>
                 <button
                   onClick={handleDeleteAccount}
                   disabled={isDeleting || deleteConfirmText !== "HESABIMI SIL"}
-                  className="flex-1 px-4 py-2.5 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="flex-1 px-4 py-3 bg-red-500 text-white rounded-xl text-sm font-medium hover:bg-red-600 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isDeleting ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
