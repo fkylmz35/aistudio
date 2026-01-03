@@ -15,7 +15,8 @@
       "Bash(npx -y @anthropic-ai/claude-code mcp add context7 -- npx -y @upstash/context7-mcp@latest)",
       "Bash(npx -y @upstash/context7-mcp@latest:*)",
       "Bash(timeout:*)",
-      "Bash(ping:*)"
+      "Bash(ping:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

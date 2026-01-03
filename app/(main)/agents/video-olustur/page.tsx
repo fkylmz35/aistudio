@@ -74,6 +74,12 @@ const features = [
   },
 ]
 
+// Örnek görseller (Unsplash) - Video temalı
+const sampleImages = {
+  left: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=500&fit=crop",
+  right: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=500&h=400&fit=crop"
+}
+
 // Süre seçenekleri
 const durationOptions = [4, 8, 12] as const
 
@@ -316,12 +322,27 @@ export default function VideoOlusturPage() {
   return (
     <>
       <Header title="Nairoo Video" />
+
+      {/* Ana içerik - Noise texture background */}
       <div
-        className="p-6 pb-52"
+        className="relative min-h-[calc(100vh-64px)] overflow-hidden"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
       >
+        {/* Background with noise texture */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-zinc-900"
+          style={{
+            backgroundImage: `radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
+
+        {/* Blur orbs for ambient effect */}
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-zinc-800/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-40 right-1/4 w-80 h-80 bg-zinc-700/15 rounded-full blur-[100px]" />
+
         {/* Drag overlay */}
         <AnimatePresence>
           {isDragging && (
@@ -346,110 +367,182 @@ export default function VideoOlusturPage() {
           )}
         </AnimatePresence>
 
-        <div className="max-w-4xl mx-auto pt-4">
-          {/* Header Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <motion.div
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
-                <span className="text-white">Nairoo </span>
-                <span className="bg-gradient-to-r from-zinc-300 via-white to-zinc-300 bg-clip-text text-transparent">
-                  Video
-                </span>
-              </h1>
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-zinc-400 text-base md:text-lg max-w-xl mx-auto"
-            >
-              Metinden, görselden veya videodan profesyonel videolar oluşturun
-            </motion.p>
-          </motion.div>
+        {/* Content */}
+        <div className="relative z-10 p-6 pb-48">
+          <div className="max-w-6xl mx-auto pt-4">
 
-          {/* Features Row */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex items-center justify-center gap-8 mb-12"
-          >
-            {features.map((feature, index) => (
+            {/* Hero Section with 3D Images */}
+            <div className="relative flex items-center justify-center min-h-[280px] mb-4">
+
+              {/* Sol görsel - 3D efekt */}
               <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.08, y: -2 }}
-                className="group cursor-pointer text-center"
+                initial={{ opacity: 0, x: -100, rotateY: 30 }}
+                animate={{ opacity: 1, x: 0, rotateY: 12 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block"
+                style={{ perspective: "1000px" }}
               >
-                <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-zinc-900/80 border border-zinc-800 flex items-center justify-center group-hover:bg-zinc-800 group-hover:border-zinc-700 transition-all duration-300">
-                  <feature.icon className="w-6 h-6 text-zinc-400 group-hover:text-white transition-colors" />
-                </div>
-                <p className="text-xs font-medium text-zinc-400 group-hover:text-white transition-colors">{feature.title}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* How It Works Section */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-zinc-700" />
-              <h2 className="text-lg font-medium text-zinc-300">Nasıl Çalışır?</h2>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-zinc-700" />
-            </div>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-            >
-              {howItWorksSteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                  className="relative group"
+                <div
+                  className="relative w-48 h-60 rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
+                  style={{
+                    transform: "rotateY(-15deg) rotateX(5deg)",
+                    transformStyle: "preserve-3d"
+                  }}
                 >
-                  <div className="h-full p-5 bg-zinc-900/30 border border-zinc-800/50 rounded-2xl transition-all duration-300 hover:bg-zinc-900/50 hover:border-zinc-700">
-                    {/* Step number */}
-                    <div className="absolute -top-3 -left-2 w-7 h-7 bg-white text-black rounded-lg flex items-center justify-center text-xs font-bold shadow-lg">
-                      {index + 1}
-                    </div>
-
-                    {/* Arrow connector */}
-                    {index < 3 && (
-                      <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                        <ArrowRight className="w-4 h-4 text-zinc-700" />
-                      </div>
-                    )}
-
-                    <div className="flex flex-col items-center text-center pt-2">
-                      <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-zinc-800/50 border border-zinc-700/50 mb-3 group-hover:bg-zinc-800 group-hover:border-zinc-600 transition-all">
-                        <step.icon className="w-5 h-5 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
-                      </div>
-                      <h3 className="text-sm font-medium text-zinc-200 mb-1">{step.title}</h3>
-                      <p className="text-xs text-zinc-500 mb-2">{step.description}</p>
-                      <p className="text-[10px] text-zinc-600">{step.detail}</p>
+                  <img
+                    src={sampleImages.left}
+                    alt="AI Generated Video"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  {/* Video play icon overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <Play className="w-5 h-5 text-white ml-0.5" />
                     </div>
                   </div>
+                </div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-gradient-to-br from-zinc-400 to-zinc-600 rounded-2xl" />
+              </motion.div>
+
+              {/* Sağ görsel - 3D efekt */}
+              <motion.div
+                initial={{ opacity: 0, x: 100, rotateY: -30 }}
+                animate={{ opacity: 1, x: 0, rotateY: -12 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block"
+                style={{ perspective: "1000px" }}
+              >
+                <div
+                  className="relative w-52 h-48 rounded-2xl overflow-hidden shadow-2xl shadow-black/50"
+                  style={{
+                    transform: "rotateY(15deg) rotateX(-5deg)",
+                    transformStyle: "preserve-3d"
+                  }}
+                >
+                  <img
+                    src={sampleImages.right}
+                    alt="AI Generated Video"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  {/* Video play icon overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <Play className="w-5 h-5 text-white ml-0.5" />
+                    </div>
+                  </div>
+                </div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-gradient-to-br from-zinc-500 to-zinc-700 rounded-2xl" />
+              </motion.div>
+
+              {/* Merkez içerik */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center z-20 px-4"
+              >
+                <motion.h1
+                  className="text-3xl md:text-5xl font-bold mb-2 tracking-tight"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <span className="text-white">Nairoo </span>
+                  <span className="bg-gradient-to-r from-zinc-300 via-white to-zinc-300 bg-clip-text text-transparent">
+                    Video
+                  </span>
+                </motion.h1>
+                <motion.p
+                  className="text-zinc-400 text-base md:text-lg max-w-md mx-auto mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  Metinden, görselden veya videodan profesyonel videolar oluşturun
+                </motion.p>
+
+                {/* Feature Cards */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex items-center justify-center gap-6 flex-wrap"
+                >
+                  {features.map((feature, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      className="group cursor-pointer text-center"
+                    >
+                      <div className="w-12 h-12 mx-auto mb-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 flex items-center justify-center group-hover:bg-zinc-800 group-hover:border-zinc-700 transition-all duration-300">
+                        <feature.icon className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
+                      </div>
+                      <p className="text-[11px] font-medium text-zinc-400 group-hover:text-white transition-colors">{feature.title}</p>
+                    </motion.div>
+                  ))}
                 </motion.div>
-              ))}
+              </motion.div>
+            </div>
+
+            {/* How It Works Section */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-12"
+            >
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-zinc-700" />
+                <h2 className="text-base font-medium text-zinc-300">Nasıl Çalışır?</h2>
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-zinc-700" />
+              </div>
+
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4"
+              >
+                {howItWorksSteps.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    whileHover={{ y: -2 }}
+                    className="relative group"
+                  >
+                    <div className="h-full p-4 bg-zinc-900/30 border border-zinc-800/50 rounded-xl transition-all duration-300 hover:bg-zinc-900/50 hover:border-zinc-700">
+                      {/* Step number */}
+                      <div className="absolute -top-2 -left-1.5 w-5 h-5 bg-white text-black rounded-md flex items-center justify-center text-[10px] font-bold shadow-lg">
+                        {index + 1}
+                      </div>
+
+                      {/* Arrow connector */}
+                      {index < 3 && (
+                        <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                          <ArrowRight className="w-3 h-3 text-zinc-700" />
+                        </div>
+                      )}
+
+                      <div className="flex flex-col items-center text-center pt-1">
+                        <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50 mb-2 group-hover:bg-zinc-800 group-hover:border-zinc-600 transition-all">
+                          <step.icon className="w-4 h-4 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
+                        </div>
+                        <h3 className="text-sm font-medium text-zinc-200 mb-1">{step.title}</h3>
+                        <p className="text-[11px] text-zinc-500 leading-tight">{step.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

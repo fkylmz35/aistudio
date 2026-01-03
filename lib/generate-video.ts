@@ -1,4 +1,4 @@
-const WEBHOOK_URL = process.env.NEXT_PUBLIC_WEBHOOK_URL
+const VIDEO_WEBHOOK_URL = process.env.NEXT_PUBLIC_VIDEO_WEBHOOK_URL
 
 export interface GenerateVideoRequest {
   user_id: string
@@ -24,17 +24,14 @@ export interface GenerateVideoResponse {
  * @returns İstek başarıyla gönderildi mi
  */
 export async function generateVideo(request: GenerateVideoRequest): Promise<GenerateVideoResponse> {
-  if (!WEBHOOK_URL) {
+  if (!VIDEO_WEBHOOK_URL) {
     return {
       success: false,
-      error: "Webhook URL yapılandırılmamış",
+      error: "Video webhook URL yapılandırılmamış",
     }
   }
 
   try {
-    // Webhook URL'ini videogen endpoint'ine çevir
-    const videoWebhookUrl = WEBHOOK_URL.replace("/imagegen", "/videogen")
-
     const payload = {
       user_id: request.user_id,
       prompt: request.prompt,
@@ -47,7 +44,7 @@ export async function generateVideo(request: GenerateVideoRequest): Promise<Gene
     }
 
     // Fire and forget - response beklemeden istek gönder
-    fetch(videoWebhookUrl, {
+    fetch(VIDEO_WEBHOOK_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
