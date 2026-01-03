@@ -26,6 +26,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { LoginPromptModal } from "@/components/login-prompt-modal"
 
 // Nasıl çalışır adımları
 const howItWorksSteps = [
@@ -156,6 +157,7 @@ export default function VideoOlusturPage() {
   const [showAspectDropdown, setShowAspectDropdown] = useState(false)
   const [showResolutionDropdown, setShowResolutionDropdown] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { toast } = useToast()
   const { user } = useAuth()
@@ -225,7 +227,12 @@ export default function VideoOlusturPage() {
   }
 
   const handleGenerate = async () => {
-    if ((!prompt.trim() && !selectedFile) || isGenerating || isCooldown || !user) {
+    if ((!prompt.trim() && !selectedFile) || isGenerating || isCooldown) {
+      return
+    }
+
+    if (!user) {
+      setShowLoginModal(true)
       return
     }
 
@@ -789,10 +796,10 @@ export default function VideoOlusturPage() {
             {/* Generate Button */}
             <button
               onClick={handleGenerate}
-              disabled={(!prompt.trim() && !selectedFile) || isGenerating || isCooldown || !user}
+              disabled={(!prompt.trim() && !selectedFile) || isGenerating || isCooldown}
               className={cn(
                 "flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200",
-                (prompt.trim() || selectedFile) && !isGenerating && !isCooldown && user
+                (prompt.trim() || selectedFile) && !isGenerating && !isCooldown
                   ? "bg-white text-black shadow-lg hover:bg-zinc-100"
                   : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
               )}
@@ -822,6 +829,14 @@ export default function VideoOlusturPage() {
           onClick={closeAllDropdowns}
         />
       )}
+
+      {/* Login Prompt Modal */}
+      <LoginPromptModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        title="Video Oluşturmak İçin Giriş Yapın"
+        description="AI ile video oluşturmak için ücretsiz hesap oluşturun veya giriş yapın."
+      />
     </>
   )
 }

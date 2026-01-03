@@ -20,6 +20,7 @@ import {
   X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { LoginPromptModal } from "@/components/login-prompt-modal"
 
 // Özellik kartları
 const features = [
@@ -74,6 +75,7 @@ export default function CreateImagePage() {
   const [showAspectDropdown, setShowAspectDropdown] = useState(false)
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [isUploading, setIsUploading] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { toast } = useToast()
   const { user } = useAuth()
@@ -98,7 +100,12 @@ export default function CreateImagePage() {
   }
 
   const handleGenerate = async () => {
-    if (!prompt.trim() || isGenerating || isCooldown || !user) {
+    if (!prompt.trim() || isGenerating || isCooldown) {
+      return
+    }
+
+    if (!user) {
+      setShowLoginModal(true)
       return
     }
 
@@ -479,10 +486,10 @@ export default function CreateImagePage() {
               {/* Generate button */}
               <button
                 onClick={handleGenerate}
-                disabled={!prompt.trim() || isGenerating || isCooldown || !user}
+                disabled={!prompt.trim() || isGenerating || isCooldown}
                 className={cn(
                   "flex items-center justify-center rounded-xl transition-all duration-200 w-11 h-11",
-                  prompt.trim() && !isGenerating && !isCooldown && user
+                  prompt.trim() && !isGenerating && !isCooldown
                     ? "bg-white text-black hover:bg-zinc-200 shadow-lg"
                     : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
                 )}
@@ -519,6 +526,14 @@ export default function CreateImagePage() {
           }}
         />
       )}
+
+      {/* Login Prompt Modal */}
+      <LoginPromptModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        title="Görsel Oluşturmak İçin Giriş Yapın"
+        description="AI ile görsel oluşturmak için ücretsiz hesap oluşturun veya giriş yapın."
+      />
     </>
   )
 }

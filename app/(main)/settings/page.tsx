@@ -21,6 +21,7 @@ import { useAuth } from "@/contexts/auth-context"
 import { supabase } from "@/lib/supabase-browser"
 import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
+import { AuthGuard } from "@/components/auth-guard"
 
 // Password validation
 const passwordRequirements = {
@@ -184,6 +185,26 @@ export default function SettingsPage() {
         <div className="flex items-center justify-center h-[calc(100vh-64px)]">
           <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
         </div>
+      </>
+    )
+  }
+
+  // Auth guard for non-authenticated users
+  if (!user) {
+    return (
+      <>
+        <Header title="Hesap Ayarları" />
+        <AuthGuard
+          title="Hesap Ayarlarına Erişim İçin Giriş Yapın"
+          description="Hesap ayarlarınızı görüntülemek ve güncellemek için giriş yapmanız gerekiyor."
+          benefits={[
+            "Profil bilgilerinizi yönetin",
+            "E-posta ve şifrenizi güncelleyin",
+            "Bildirim tercihlerinizi ayarlayın",
+          ]}
+          primaryButtonText="Giriş Yap"
+          secondaryButtonText="Kayıt Ol"
+        />
       </>
     )
   }

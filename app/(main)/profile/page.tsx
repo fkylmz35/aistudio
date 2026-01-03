@@ -9,6 +9,7 @@ import { Mail, Calendar, ImageIcon, Sparkles, Settings, LogOut, Loader2, Crown, 
 import { useAuth } from "@/contexts/auth-context"
 import { useCredits } from "@/contexts/credits-context"
 import { supabase } from "@/lib/supabase-browser"
+import { AuthGuard } from "@/components/auth-guard"
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -83,6 +84,26 @@ export default function ProfilePage() {
         <div className="flex items-center justify-center h-[calc(100vh-64px)]">
           <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
         </div>
+      </>
+    )
+  }
+
+  // Auth guard for non-authenticated users
+  if (!user) {
+    return (
+      <>
+        <Header title="Profil" />
+        <AuthGuard
+          title="Profil Ayarlarına Erişim İçin Giriş Yapın"
+          description="Hesap bilgilerinizi görüntülemek ve güncellemek için giriş yapmanız gerekiyor."
+          benefits={[
+            "Hesap bilgilerinizi yönetin",
+            "Kredi bakiyenizi görün",
+            "Ayarlarınızı özelleştirin",
+          ]}
+          primaryButtonText="Giriş Yap"
+          secondaryButtonText="Kayıt Ol"
+        />
       </>
     )
   }

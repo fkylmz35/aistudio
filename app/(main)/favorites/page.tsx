@@ -8,8 +8,11 @@ import { agents, type Agent } from "@/lib/agents"
 import { useFavorites } from "@/contexts/favorites-context"
 import { Heart, Coins, HeartOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/contexts/auth-context"
+import { AuthGuard } from "@/components/auth-guard"
 
 export default function FavoritesPage() {
+  const { user } = useAuth()
   const { favorites, isLoading, isFavorite, toggleFavorite } = useFavorites()
 
   const favoriteAgents = agents.filter(agent => favorites.includes(agent.slug))
@@ -19,6 +22,26 @@ export default function FavoritesPage() {
     e.stopPropagation()
     toggleFavorite(slug)
   }, [toggleFavorite])
+
+  // Auth guard for non-authenticated users
+  if (!user) {
+    return (
+      <>
+        <Header title="Favoriler" />
+        <AuthGuard
+          title="Favorilerinizi Görmek İçin Giriş Yapın"
+          description="Favori agentlarınıza erişmek ve yeni favoriler eklemek için giriş yapın."
+          benefits={[
+            "40 kredi hediye ile başla",
+            "Favori agentlarını kaydet",
+            "Hızlı erişim sağla",
+          ]}
+          primaryButtonText="Giriş Yap"
+          secondaryButtonText="Kayıt Ol"
+        />
+      </>
+    )
+  }
 
   if (isLoading) {
     return (

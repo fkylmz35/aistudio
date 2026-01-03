@@ -7,6 +7,7 @@ import { ImageIcon, Download, Trash2, ZoomIn, Loader2 } from "lucide-react"
 import { supabase } from "@/lib/supabase-browser"
 import { useAuth } from "@/contexts/auth-context"
 import { usePendingImages, type PendingImage } from "@/contexts/pending-images-context"
+import { AuthGuard } from "@/components/auth-guard"
 
 interface GeneratedImage {
   id: string
@@ -196,6 +197,26 @@ export default function GalleryPage() {
     } catch (error) {
       console.error("Download error:", error)
     }
+  }
+
+  // Auth guard for non-authenticated users
+  if (!user) {
+    return (
+      <>
+        <Header title="Galeri" />
+        <AuthGuard
+          title="Galerinizi Görmek İçin Giriş Yapın"
+          description="Oluşturduğunuz tüm AI videolar ve görseller galerinizde saklanır. Galerinize erişmek için lütfen giriş yapın."
+          benefits={[
+            "40 kredi hediye ile başla",
+            "Sınırsız içerik oluştur",
+            "Tüm içeriklerini sakla",
+          ]}
+          primaryButtonText="Giriş Yap"
+          secondaryButtonText="Ücretsiz Kayıt Ol"
+        />
+      </>
+    )
   }
 
   if (isLoading) {
